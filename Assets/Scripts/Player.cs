@@ -7,14 +7,14 @@ public class Player : MonoBehaviour
     [Header("Components")]
     [SerializeField] FPController fpController;
 
-    void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
-        fpController.moveInput = value.Get<Vector2>();
+        fpController.moveInput = context.ReadValue<Vector2>();
     }
 
-    void OnLook(InputValue value)
+    public void OnLook(InputAction.CallbackContext context)
     {
-        fpController.lookInput = value.Get<Vector2>();
+        fpController.lookInput = context.ReadValue<Vector2>();
     }
 
     private void Start()
@@ -27,5 +27,4 @@ public class Player : MonoBehaviour
     {
         if (fpController == null) fpController = GetComponent<FPController>();
     }
-
 }
