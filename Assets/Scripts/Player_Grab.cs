@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerGrab : MonoBehaviour
 {
+
+    GameManager gameManager;
     
     //Ray from Player camera
     
@@ -18,9 +21,11 @@ public class PlayerGrab : MonoBehaviour
     [SerializeField]
     private float HandFollowSpeed = 1f;
 
+    private Vector3 HeldTargetNormalScale;
+
     private void Start()
     {
-        
+        gameManager = FindFirstObjectByType<GameManager>();
     }
     void Update()
     {
@@ -55,6 +60,7 @@ public class PlayerGrab : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                
                 Heldtarget = Grabtarget;
 
                 Grab_rb = Heldtarget.GetComponent<Rigidbody>();
@@ -65,16 +71,53 @@ public class PlayerGrab : MonoBehaviour
                 if (Held_collider != null)
                     Held_collider.enabled = false;
 
+
+
+                Heldtarget.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
                 Heldtarget.transform.SetParent(HandTransform);
                 Heldtarget.transform.localPosition = Vector3.zero;
+                HeldTargetNormalScale = Heldtarget.transform.localScale;
                 Heldtarget.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                
+                
+                
+                gameManager.AudioPlayGrab();
             }
         }
+        
     }
 
     private void Throw ()
     {
-        
+        if (Heldtarget != null)
+        {
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                Heldtarget.transform.parent = null;
+                Heldtarget.transform.localScale = HeldTargetNormalScale;
+                Grab_rb.isKinematic = false;
+                Grab_rb.useGravity = true;
+                
+                Held_collider = Heldtarget.GetComponent<Collider>();
+                if (Held_collider != null)
+                {
+                    Held_collider.enabled = true;
+                }
+
+                Transform cam = Camera.main.transform;
+                Vector3 dropPos = cam.position + cam.forward * 1.2f;
+                dropPos.y = transform.position.y + 2f;
+                Heldtarget.transform.position = dropPos;
+
+
+
+
+                StartCoroutine(Audio_CanDropCoroutine());
+                
+                Heldtarget = null;
+
+            }
+        }
     }
 
     private void MoveHand()
@@ -84,17 +127,32 @@ public class PlayerGrab : MonoBehaviour
         float mouseX = (Input.mousePosition.x / Screen.width - 0.5f);
         float mouseY = (Input.mousePosition.y / Screen.height - 0.5f);
 
-        Vector3 targetLocalPos = new Vector3(
-            mouseX + 1.5f,   
-            mouseY - 0.5f,   
+        Vector3 targetLocalPos = new Vector3
+            (
+                mouseX + 1.5f,   
+                mouseY - 0.5f,   
             2f               
-        );
+            );
 
         HandTransform.localPosition = Vector3.Lerp(
             HandTransform.localPosition,
             targetLocalPos,
             Time.deltaTime * HandFollowSpeed
         );
+    }
+
+    IEnumerator Audio_CanDropCoroutine ()
+    {
+        bool Is_Playing = false;
+        if (Is_Playing == false)
+        {
+            Is_Playing = true;
+            gameManager.AudioPlayCanDrop();
+            yield return new WaitForSeconds(1f);
+            Is_Playing = false;
+        }
+
+        
     }
 
 
