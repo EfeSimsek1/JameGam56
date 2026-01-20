@@ -81,7 +81,7 @@ public class PlayerGrab : MonoBehaviour
         if (Grabtarget != null && Heldtarget == null)
         {
             Heldtarget = Grabtarget;
-            Ingrediants Held_Ingrediants = Heldtarget.GetComponent<Ingrediants>();
+            Ingredient Held_Ingrediants = Heldtarget.GetComponent<Ingredient>();
             float Sizechangeval = Held_Ingrediants.SizeChangeValue;
             Grab_rb = Heldtarget.GetComponent<Rigidbody>();
             Grab_rb.isKinematic = true;
