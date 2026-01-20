@@ -6,6 +6,8 @@ public class Ingrediants : MonoBehaviour
     private Outline outline;
 
 
+    [Tooltip("0.1 ~ 1")]  public float SizeChangeValue;
+
     void Start()
     {
         outline = GetComponent<Outline>();
