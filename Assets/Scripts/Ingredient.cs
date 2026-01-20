@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Ingrediants : MonoBehaviour
+public class Ingredient : MonoBehaviour
 {
 
     private Outline outline;

@@ -37,6 +37,7 @@ public class PlayerGrab : MonoBehaviour
 
     private Outline previousOutline;  
 
+    // highlights observed object and targets it for grabbing
     private void CheckTarget()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
