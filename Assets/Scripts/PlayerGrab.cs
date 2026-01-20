@@ -25,6 +25,8 @@ public class PlayerGrab : MonoBehaviour
     private Vector3 heldTargetNormalScale;
     Vector3 initalHandPos;
 
+    private FridgeDoor interactableDoor;
+
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
@@ -45,6 +47,8 @@ public class PlayerGrab : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
         Debug.DrawRay(ray.origin, ray.direction * 4f, Color.red);
 
+        interactableDoor = null;
+
         if (Physics.Raycast(ray, out RaycastHit hit, 2f))
         {
             if (hit.collider.CompareTag("Grabbable"))
@@ -64,6 +68,25 @@ public class PlayerGrab : MonoBehaviour
                 }
 
                 grabTarget = newTarget;
+                return;
+            }
+
+            FridgeDoor door = hit.collider.GetComponent<FridgeDoor>();
+            if (door != null)
+            {
+                Outline outline = hit.collider.GetComponent<Outline>();
+
+                if (outline != null && outline != previousOutline)
+                {
+                    
+                    if (previousOutline != null)
+                        previousOutline.enabled = false;
+                    outline.enabled = true;
+                    previousOutline = outline;
+                }
+
+                interactableDoor = door;
+                grabTarget = null;
                 return;
             }
         }
@@ -174,7 +197,12 @@ public class PlayerGrab : MonoBehaviour
     {
         if (context.performed == false) return;
 
-        
+        if (interactableDoor != null)
+        {
+            interactableDoor.ToggleDoor();
+            return;
+        }
+
         if (grabTarget != null)
         {
             if (heldTarget != null)
