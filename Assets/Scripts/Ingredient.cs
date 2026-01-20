@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class Ingrediants : MonoBehaviour
+public class Ingredient : MonoBehaviour
 {
 
     private Outline outline;
 
+
+    [Tooltip("0.1 ~ 1")]  public float SizeChangeValue;
 
     void Start()
     {

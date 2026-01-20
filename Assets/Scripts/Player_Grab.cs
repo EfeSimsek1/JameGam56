@@ -37,6 +37,7 @@ public class PlayerGrab : MonoBehaviour
 
     private Outline previousOutline;  
 
+    // highlights observed object and targets it for grabbing
     private void CheckTarget()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
@@ -80,10 +81,12 @@ public class PlayerGrab : MonoBehaviour
         if (Grabtarget != null && Heldtarget == null)
         {
             Heldtarget = Grabtarget;
-
+            Ingredient Held_Ingrediants = Heldtarget.GetComponent<Ingredient>();
+            float Sizechangeval = Held_Ingrediants.SizeChangeValue;
             Grab_rb = Heldtarget.GetComponent<Rigidbody>();
             Grab_rb.isKinematic = true;
             Grab_rb.useGravity = false;
+
 
             Held_collider = Heldtarget.GetComponent<Collider>();
             if (Held_collider != null)
@@ -95,7 +98,8 @@ public class PlayerGrab : MonoBehaviour
             Heldtarget.transform.SetParent(HandTransform);
             Heldtarget.transform.localPosition = Vector3.zero;
             HeldTargetNormalScale = Heldtarget.transform.localScale;
-            ///Heldtarget.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            Heldtarget.transform.localScale = new Vector3(Sizechangeval, Sizechangeval, Sizechangeval);
+
 
             gameManager.AudioPlayGrab();
         }
