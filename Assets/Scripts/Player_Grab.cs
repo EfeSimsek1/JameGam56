@@ -81,10 +81,12 @@ public class PlayerGrab : MonoBehaviour
         if (Grabtarget != null && Heldtarget == null)
         {
             Heldtarget = Grabtarget;
-
+            Ingrediants Held_Ingrediants = Heldtarget.GetComponent<Ingrediants>();
+            float Sizechangeval = Held_Ingrediants.SizeChangeValue;
             Grab_rb = Heldtarget.GetComponent<Rigidbody>();
             Grab_rb.isKinematic = true;
             Grab_rb.useGravity = false;
+
 
             Held_collider = Heldtarget.GetComponent<Collider>();
             if (Held_collider != null)
@@ -96,7 +98,8 @@ public class PlayerGrab : MonoBehaviour
             Heldtarget.transform.SetParent(HandTransform);
             Heldtarget.transform.localPosition = Vector3.zero;
             HeldTargetNormalScale = Heldtarget.transform.localScale;
-            ///Heldtarget.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            Heldtarget.transform.localScale = new Vector3(Sizechangeval, Sizechangeval, Sizechangeval);
+
 
             gameManager.AudioPlayGrab();
         }
