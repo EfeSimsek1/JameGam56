@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerGrab : MonoBehaviour
 {
@@ -30,22 +31,21 @@ public class PlayerGrab : MonoBehaviour
     void Update()
     {
         CheckTarget();
-        Grab();
-        Throw();
-        MoveHand();
-        
+        //MoveHand();
     }
     
     
     private void CheckTarget ()
     {
-        Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
+        Debug.DrawRay(ray.origin, ray.direction, Color.red);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 3f))
         {
             if (hit.collider.CompareTag("Grabbable"))
             {
                 Grabtarget = hit.collider.gameObject;
+                //Debug.Log("can grab this");
                 return;
             }
         }
@@ -58,31 +58,25 @@ public class PlayerGrab : MonoBehaviour
     {
         if (Grabtarget != null && Heldtarget == null)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                
-                Heldtarget = Grabtarget;
+            Heldtarget = Grabtarget;
 
-                Grab_rb = Heldtarget.GetComponent<Rigidbody>();
-                Grab_rb.isKinematic = true;
-                Grab_rb.useGravity = false;
+            Grab_rb = Heldtarget.GetComponent<Rigidbody>();
+            Grab_rb.isKinematic = true;
+            Grab_rb.useGravity = false;
 
-                Held_collider = Heldtarget.GetComponent<Collider>();
-                if (Held_collider != null)
-                    Held_collider.enabled = false;
+            Held_collider = Heldtarget.GetComponent<Collider>();
+            if (Held_collider != null)
+                Held_collider.enabled = false;
 
 
 
-                Heldtarget.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-                Heldtarget.transform.SetParent(HandTransform);
-                Heldtarget.transform.localPosition = Vector3.zero;
-                HeldTargetNormalScale = Heldtarget.transform.localScale;
-                Heldtarget.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                
-                
-                
-                gameManager.AudioPlayGrab();
-            }
+            Heldtarget.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+            Heldtarget.transform.SetParent(HandTransform);
+            Heldtarget.transform.localPosition = Vector3.zero;
+            HeldTargetNormalScale = Heldtarget.transform.localScale;
+            ///Heldtarget.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+            gameManager.AudioPlayGrab();
         }
         
     }
@@ -91,32 +85,28 @@ public class PlayerGrab : MonoBehaviour
     {
         if (Heldtarget != null)
         {
-            if (Input.GetKeyDown(KeyCode.G))
+            Heldtarget.transform.parent = null;
+            Heldtarget.transform.localScale = HeldTargetNormalScale;
+            Grab_rb.isKinematic = false;
+            Grab_rb.useGravity = true;
+
+            Held_collider = Heldtarget.GetComponent<Collider>();
+            if (Held_collider != null)
             {
-                Heldtarget.transform.parent = null;
-                Heldtarget.transform.localScale = HeldTargetNormalScale;
-                Grab_rb.isKinematic = false;
-                Grab_rb.useGravity = true;
-                
-                Held_collider = Heldtarget.GetComponent<Collider>();
-                if (Held_collider != null)
-                {
-                    Held_collider.enabled = true;
-                }
-
-                Transform cam = Camera.main.transform;
-                Vector3 dropPos = cam.position + cam.forward * 1.2f;
-                dropPos.y = transform.position.y + 2f;
-                Heldtarget.transform.position = dropPos;
-
-
-
-
-                StartCoroutine(Audio_CanDropCoroutine());
-                
-                Heldtarget = null;
-
+                Held_collider.enabled = true;
             }
+
+            Transform cam = Camera.main.transform;
+            Vector3 dropPos = cam.position + cam.forward * 1.2f;
+            dropPos.y = transform.position.y + 2f;
+            Heldtarget.transform.position = dropPos;
+
+
+
+
+            StartCoroutine(Audio_CanDropCoroutine());
+
+            Heldtarget = null;
         }
     }
 
@@ -151,8 +141,20 @@ public class PlayerGrab : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Is_Playing = false;
         }
+    }
 
-        
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed && Grabtarget != null && Heldtarget == null)
+        {
+            Debug.Log("grab");
+            Grab();
+        }
+        else if (context.performed && Heldtarget != null) 
+        {
+            Debug.Log("throw");
+            Throw();
+        }
     }
 
 

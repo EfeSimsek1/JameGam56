@@ -23,11 +23,17 @@ public class GameManager : MonoBehaviour
 
     public void AudioPlayCanDrop()
     {
-        SFX_AudioSource.PlayOneShot(CanDrop);
+        if (SFX_AudioSource != null)
+        {
+            SFX_AudioSource.PlayOneShot(CanDrop);
+        }
     }
     public void AudioPlayGrab()
     {
-        SFX_AudioSource.PlayOneShot(Grab);
+        if (SFX_AudioSource != null)
+        {
+            SFX_AudioSource.PlayOneShot(Grab);
+        }
     }
 
 }
