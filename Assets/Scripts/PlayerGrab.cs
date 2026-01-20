@@ -11,22 +11,24 @@ public class PlayerGrab : MonoBehaviour
     
     RaycastHit hit;
 
-    GameObject Grabtarget;
-    GameObject Heldtarget;
-    Rigidbody Grab_rb;
-    Collider Held_collider;
+    GameObject grabTarget;
+    GameObject heldTarget;
+    Rigidbody grabRb;
+    Collider heldCollider;
 
     [SerializeField]
-    public Transform HandTransform;
+    public Transform handTransform;
 
     [SerializeField]
-    private float HandFollowSpeed = 1f;
+    private float handFollowSpeed = 1f;
 
-    private Vector3 HeldTargetNormalScale;
+    private Vector3 heldTargetNormalScale;
+    Vector3 initalHandPos;
 
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+        initalHandPos = handTransform.localPosition;
     }
     void Update()
     {
@@ -61,7 +63,7 @@ public class PlayerGrab : MonoBehaviour
                     previousOutline = outline;
                 }
 
-                Grabtarget = newTarget;
+                grabTarget = newTarget;
                 return;
             }
         }
@@ -71,35 +73,31 @@ public class PlayerGrab : MonoBehaviour
             previousOutline.enabled = false;
 
         previousOutline = null;
-        Grabtarget = null;
+        grabTarget = null;
     }
 
 
     private void Grab()
     {
-        
-        if (Grabtarget != null && Heldtarget == null)
+        if (grabTarget != null && heldTarget == null)
         {
-            Heldtarget = Grabtarget;
-            Ingredient Held_Ingrediants = Heldtarget.GetComponent<Ingredient>();
-            float Sizechangeval = Held_Ingrediants.SizeChangeValue;
-            Grab_rb = Heldtarget.GetComponent<Rigidbody>();
-            Grab_rb.isKinematic = true;
-            Grab_rb.useGravity = false;
+            heldTarget = grabTarget;
+            Ingredient heldIngredients = heldTarget.GetComponent<Ingredient>();
+            float sizeChangeVal = heldIngredients.sizeChangeValue;
+            grabRb = heldTarget.GetComponent<Rigidbody>();
+            grabRb.isKinematic = true;
+            grabRb.useGravity = false;
 
+            heldCollider = heldTarget.GetComponent<Collider>();
+            if (heldCollider != null)
+                heldCollider.enabled = false;
 
-            Held_collider = Heldtarget.GetComponent<Collider>();
-            if (Held_collider != null)
-                Held_collider.enabled = false;
-
-            
-
-            Heldtarget.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-            Heldtarget.transform.SetParent(HandTransform);
-            Heldtarget.transform.localPosition = Vector3.zero;
-            HeldTargetNormalScale = Heldtarget.transform.localScale;
-            Heldtarget.transform.localScale = new Vector3(Sizechangeval, Sizechangeval, Sizechangeval);
-
+            heldTarget.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+            heldTarget.transform.SetParent(handTransform);
+            heldTarget.transform.localPosition = Vector3.zero;
+            heldTargetNormalScale = heldTarget.transform.localScale;
+            heldTarget.transform.localScale = heldTarget.transform.localScale * sizeChangeVal;
+            //Debug.Log(heldTargetNormalScale + ", " + heldTarget.transform.localScale);
 
             gameManager.AudioPlayGrab();
         }
@@ -108,36 +106,40 @@ public class PlayerGrab : MonoBehaviour
 
     private void Throw ()
     {
-        if (Heldtarget != null)
+        if (heldTarget != null)
         {
-            Heldtarget.transform.parent = null;
-            Heldtarget.transform.localScale = HeldTargetNormalScale;
-            Grab_rb.isKinematic = false;
-            Grab_rb.useGravity = true;
+            heldTarget.transform.parent = null;
+            heldTarget.transform.localScale = heldTargetNormalScale;
+            grabRb.isKinematic = false;
+            grabRb.useGravity = true;
 
-            Held_collider = Heldtarget.GetComponent<Collider>();
-            if (Held_collider != null)
+            heldCollider = heldTarget.GetComponent<Collider>();
+            if (heldCollider != null)
             {
-                Held_collider.enabled = true;
+                heldCollider.enabled = true;
             }
 
             Transform cam = Camera.main.transform;
             Vector3 dropPos = cam.position + cam.forward * 1.2f;
             dropPos.y = transform.position.y + 2f;
-            Heldtarget.transform.position = dropPos;
+            heldTarget.transform.position = dropPos;
 
 
             
 
             StartCoroutine(Audio_CanDropCoroutine());
 
-            Heldtarget = null;
+            heldTarget = null;
         }
     }
 
     private void MoveHand()
     {
-        if (Heldtarget == null) return;
+        if (heldTarget == null)
+        {
+            handTransform.localPosition = initalHandPos;
+            return;
+        }
 
         float mouseX = (Input.mousePosition.x / Screen.width - 0.5f);
         float mouseY = (Input.mousePosition.y / Screen.height - 0.5f);
@@ -146,13 +148,13 @@ public class PlayerGrab : MonoBehaviour
             (
                 mouseX + 1.5f,   
                 mouseY - 0.5f,   
-            2f               
+            1f               
             );
 
-        HandTransform.localPosition = Vector3.Lerp(
-            HandTransform.localPosition,
+        handTransform.localPosition = Vector3.Lerp(
+            handTransform.localPosition,
             targetLocalPos,
-            Time.deltaTime * HandFollowSpeed
+            Time.deltaTime * handFollowSpeed
         );
     }
 
@@ -173,9 +175,9 @@ public class PlayerGrab : MonoBehaviour
         if (context.performed == false) return;
 
         
-        if (Grabtarget != null)
+        if (grabTarget != null)
         {
-            if (Heldtarget != null)
+            if (heldTarget != null)
             {
                 Throw(); 
             }
@@ -184,7 +186,7 @@ public class PlayerGrab : MonoBehaviour
         }
 
         
-        if (Heldtarget != null)
+        if (heldTarget != null)
         {
             Throw();
         }
