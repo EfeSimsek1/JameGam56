@@ -33,29 +33,50 @@ public class PlayerGrab : MonoBehaviour
         CheckTarget();
         //MoveHand();
     }
-    
-    
-    private void CheckTarget ()
+
+
+    private Outline previousOutline;  
+
+    private void CheckTarget()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
-        Debug.DrawRay(ray.origin, ray.direction, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * 4f, Color.red);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 2f))
         {
             if (hit.collider.CompareTag("Grabbable"))
             {
-                Grabtarget = hit.collider.gameObject;
-                //Debug.Log("can grab this");
+                
+                GameObject newTarget = hit.collider.gameObject;
+                Outline outline = newTarget.GetComponent<Outline>();
+
+                if (outline != null && outline != previousOutline)
+                {
+                    
+                    if (previousOutline != null)
+                        previousOutline.enabled = false;
+
+                    outline.enabled = true;
+                    previousOutline = outline;
+                }
+
+                Grabtarget = newTarget;
                 return;
             }
         }
 
+        
+        if (previousOutline != null)
+            previousOutline.enabled = false;
+
+        previousOutline = null;
         Grabtarget = null;
-                
     }
+
 
     private void Grab()
     {
+        
         if (Grabtarget != null && Heldtarget == null)
         {
             Heldtarget = Grabtarget;
@@ -68,7 +89,7 @@ public class PlayerGrab : MonoBehaviour
             if (Held_collider != null)
                 Held_collider.enabled = false;
 
-
+            
 
             Heldtarget.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
             Heldtarget.transform.SetParent(HandTransform);
@@ -102,7 +123,7 @@ public class PlayerGrab : MonoBehaviour
             Heldtarget.transform.position = dropPos;
 
 
-
+            
 
             StartCoroutine(Audio_CanDropCoroutine());
 
@@ -145,17 +166,26 @@ public class PlayerGrab : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.performed && Grabtarget != null && Heldtarget == null)
+        if (context.performed == false) return;
+
+        
+        if (Grabtarget != null)
         {
-            Debug.Log("grab");
-            Grab();
+            if (Heldtarget != null)
+            {
+                Throw(); 
+            }
+            Grab(); 
+            return;
         }
-        else if (context.performed && Heldtarget != null) 
+
+        
+        if (Heldtarget != null)
         {
-            Debug.Log("throw");
             Throw();
         }
     }
+
 
 
 }
