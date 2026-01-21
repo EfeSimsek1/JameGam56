@@ -49,7 +49,6 @@ public class PlayerGrab : MonoBehaviour
         {
             if (hit.collider.CompareTag("Grabbable"))
             {
-                
                 GameObject newTarget = hit.collider.gameObject;
                 Outline outline = newTarget.GetComponent<Outline>();
 
@@ -123,7 +122,7 @@ public class PlayerGrab : MonoBehaviour
             Vector3 dropPos = cam.position + cam.forward * 1.2f;
             dropPos.y = transform.position.y + 2f;
             heldTarget.transform.position = dropPos;
-
+            heldTarget.GetComponent<Ingredient>().Cut();
 
             
 
