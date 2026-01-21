@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Fade : MonoBehaviour
 {
-    private Story story;
+    
     public CanvasGroup cg;
     void Start()
     {
@@ -14,7 +14,7 @@ public class Fade : MonoBehaviour
         }
 
         cg.alpha = 0f;
-        story = FindAnyObjectByType<Story>();
+        
     }
 
     // Update is called once per frame

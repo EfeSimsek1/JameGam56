@@ -3422,7 +3422,7 @@ MonoBehaviour:
   SFX_slider: {fileID: 1393771446}
   BGM_slider: {fileID: 1355814555}
   optionPanel: {fileID: 1637925665}
-  Grab: {fileID: 0}
+  Grab: {fileID: 8300000, guid: b0da22100e11ea84f9fed5bd223d756f, type: 3}
   CanDrop: {fileID: 0}
 --- !u!4 &1710061797
 Transform:

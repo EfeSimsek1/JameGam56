@@ -15,6 +15,9 @@ public class FPController : MonoBehaviour
     public Vector2 lookSensitivity = new Vector2(0.1f, 0.1f);
     public float pitchLimit = 85f;
     [SerializeField] float currentPitch = 0f;
+    public bool canLook = true;
+    public bool canMove = true;
+
     public float CurrentPitch
     {
         get => currentPitch;
@@ -43,11 +46,14 @@ public class FPController : MonoBehaviour
     void Update()
     {
         MoveUpdate();
+
         LookUpdate();
     }
 
     private void MoveUpdate()
     {
+        if (canMove == false) return;
+
         Vector3 motion = transform.forward * moveInput.y + transform.right * moveInput.x;
         motion.y = 0;
         motion.Normalize();
@@ -73,6 +79,8 @@ public class FPController : MonoBehaviour
 
     private void LookUpdate()
     {
+        if (canLook == false) return;
+        
         //looking up and down
         Vector2 input = new Vector2(lookInput.x * lookSensitivity.x, lookInput.y * lookSensitivity.y);
 
