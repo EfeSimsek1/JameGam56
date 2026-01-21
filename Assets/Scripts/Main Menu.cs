@@ -7,12 +7,14 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject optionPanel;
 
+    private Fade fade;
     
 
     void Start()
     {
         mainMenuPanel.SetActive(true);
         optionPanel.SetActive(false);
+        fade = FindFirstObjectByType<Fade>();
     }
 
     
@@ -23,7 +25,9 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickstart()
     {
-        SceneManager.LoadScene("Game");
+        fade.FadeIn();
+        
+        
     }
 
     public void OnClickCredits ()

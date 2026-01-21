@@ -25,4 +25,13 @@ public class UI_Mouseon : MonoBehaviour,
     {
         cg.alpha = normalAlpha;
     }
+
+    private void OnEnable()
+    {
+        if (cg == null)
+        {
+            cg = GetComponent<CanvasGroup>();
+        }
+        cg.alpha = 1.0f;
+    }
 }
