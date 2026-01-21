@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -98,12 +99,16 @@ public class PlayerGrab : MonoBehaviour
             Ingredient heldIngredients = heldObject.GetComponent<Ingredient>();
             float sizeChangeVal = heldIngredients.sizeChangeValue;
             grabRb = heldObject.GetComponent<Rigidbody>();
-            grabRb.isKinematic = true;
-            grabRb.useGravity = false;
+            //grabRb.isKinematic = true;
+            //grabRb.useGravity = false;
 
             heldCollider = heldObject.GetComponent<Collider>();
+
             if (heldCollider != null)
-                heldCollider.enabled = false;
+            {
+                //heldCollider.enabled = false;
+                StartCoroutine(DisableCollider(grabRb, heldCollider));
+            }
 
             heldObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
             heldObject.transform.SetParent(handTransform);
@@ -180,6 +185,17 @@ public class PlayerGrab : MonoBehaviour
         }
     }
 
+    IEnumerator DisableCollider(Rigidbody rb, Collider coll)
+    {
+        yield return new WaitForFixedUpdate();
+
+        rb.isKinematic = true;
+        coll.enabled = false;
+        rb.useGravity = false;
+
+        rb.gameObject.transform.SetParent(handTransform);
+    }
+
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed == false) return;
@@ -195,11 +211,11 @@ public class PlayerGrab : MonoBehaviour
             return;
         }
 
-        if (taskTarget != null)
+        if (taskTarget != null && heldObject.GetComponent<Ingredient>().canBeCut)
         {
             CuttingBoard board = taskTarget.GetComponent<CuttingBoard>();
 
-            if (board != null && heldObject.GetComponent<Ingredient>().canBeCut)
+            if (board != null)
             {
                 board.CutIngredient(heldObject);
                 heldObject = null;
