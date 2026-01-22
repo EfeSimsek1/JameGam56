@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +23,8 @@ public class PlayerGrab : MonoBehaviour
     [SerializeField]
     private float HandFollowSpeed = 1f;
 
+    
+
     private Vector3 HeldTargetNormalScale;
 
     private void Start()
@@ -35,38 +38,48 @@ public class PlayerGrab : MonoBehaviour
     }
 
 
-    private Outline previousOutline;  
+    private Outline previousOutline;
 
     // highlights observed object and targets it for grabbing
     private void CheckTarget()
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
-        Debug.DrawRay(ray.origin, ray.direction * 4f, Color.red);
+        Ray ray = Camera.main.ScreenPointToRay(
+            new Vector2(Screen.width / 2f, Screen.height / 2f)
+        );
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 2f))
+        Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
+
+        if (!Physics.Raycast(ray, out RaycastHit hit, 2f))
         {
-            if (hit.collider.CompareTag("Grabbable"))
-            {
-                
-                GameObject newTarget = hit.collider.gameObject;
-                Outline outline = newTarget.GetComponent<Outline>();
-
-                if (outline != null && outline != previousOutline)
-                {
-                    
-                    if (previousOutline != null)
-                        previousOutline.enabled = false;
-
-                    outline.enabled = true;
-                    previousOutline = outline;
-                }
-
-                Grabtarget = newTarget;
-                return;
-            }
+            ClearTarget();
+            return;
         }
 
-        
+        Outline outline = hit.collider.GetComponent<Outline>();
+
+        if (outline == null)
+        {
+            ClearTarget();
+            return;
+        }
+
+        if (outline != previousOutline)
+        {
+            if (previousOutline != null)
+                previousOutline.enabled = false;
+
+            outline.enabled = true;
+            previousOutline = outline;
+        }
+
+        if (hit.collider.CompareTag("Grabbable"))
+            Grabtarget = hit.collider.gameObject;
+        else
+            Grabtarget = null;
+    }
+
+    void ClearTarget()
+    {
         if (previousOutline != null)
             previousOutline.enabled = false;
 
@@ -75,8 +88,10 @@ public class PlayerGrab : MonoBehaviour
     }
 
 
+
     private void Grab()
     {
+        
         
         if (Grabtarget != null && Heldtarget == null)
         {
@@ -108,6 +123,8 @@ public class PlayerGrab : MonoBehaviour
 
     private void Throw ()
     {
+        
+
         if (Heldtarget != null)
         {
             Heldtarget.transform.parent = null;
