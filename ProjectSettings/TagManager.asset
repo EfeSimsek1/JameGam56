@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Grabbable
   - Ground
-  - DoorOpen
+  - HighlightOnly
   layers:
   - Default
   - TransparentFX

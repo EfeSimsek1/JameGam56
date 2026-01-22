@@ -1,9 +1,13 @@
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class FPController : MonoBehaviour
 {
+    PlayerState currentState;
+
     [Header("Movement Parameters")]
     public float maxSpeed = 3.5f;
     public float acceleration = 15f;
@@ -25,25 +29,33 @@ public class FPController : MonoBehaviour
         }
     }
 
+    public bool canMove;
+    public bool canLook;
+
     [Header("Input")]
     public Vector2 moveInput;
     public Vector2 lookInput;
 
     [Header("Components")]
     [SerializeField] public CharacterController characterController;
-    [SerializeField] public Camera fpCamera;
+    [SerializeField] public GameObject fpCamera;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        currentState = PlayerState.FreeMove;
+        canMove = true;
+        canLook = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveUpdate();
-        LookUpdate();
+        if (currentState == PlayerState.FreeMove)
+        {
+            MoveUpdate();
+            LookUpdate();
+        }
     }
 
     private void MoveUpdate()
@@ -89,4 +101,15 @@ public class FPController : MonoBehaviour
         if (characterController == null) characterController = GetComponent<CharacterController>();
     }
 
+    IEnumerator TransitionCamera()
+    {
+        yield return null;
+    }
+
+    public enum PlayerState
+    {
+        FreeMove,
+        CameraTransition,
+        InTask
+    }
 }

@@ -1,6 +1,8 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerGrab : MonoBehaviour
 {
@@ -12,7 +14,8 @@ public class PlayerGrab : MonoBehaviour
     RaycastHit hit;
 
     GameObject grabTarget;
-    GameObject heldTarget;
+    GameObject heldObject;
+    GameObject taskTarget;
     Rigidbody grabRb;
     Collider heldCollider;
 
@@ -24,8 +27,6 @@ public class PlayerGrab : MonoBehaviour
 
     private Vector3 heldTargetNormalScale;
     Vector3 initalHandPos;
-
-    private FridgeDoor interactableDoor;
 
     private void Start()
     {
@@ -45,48 +46,37 @@ public class PlayerGrab : MonoBehaviour
     private void CheckTarget()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
-        Debug.DrawRay(ray.origin, ray.direction * 4f, Color.red);
-
-        interactableDoor = null;
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2f))
         {
+            #region Set Outline
+
+            Outline outline = hit.collider.gameObject.GetComponent<Outline>();
+
+            if (outline != null && outline != previousOutline)
+            {
+
+                if (previousOutline != null)
+                    previousOutline.enabled = false;
+
+                outline.enabled = true;
+                previousOutline = outline;
+            }
+
+            #endregion
+
             if (hit.collider.CompareTag("Grabbable"))
             {
-                
                 GameObject newTarget = hit.collider.gameObject;
-                Outline outline = newTarget.GetComponent<Outline>();
-
-                if (outline != null && outline != previousOutline)
-                {
-                    
-                    if (previousOutline != null)
-                        previousOutline.enabled = false;
-
-                    outline.enabled = true;
-                    previousOutline = outline;
-                }
 
                 grabTarget = newTarget;
                 return;
             }
 
-            FridgeDoor door = hit.collider.GetComponent<FridgeDoor>();
-            if (door != null)
+            if (hit.collider.CompareTag("Task"))
             {
-                Outline outline = hit.collider.GetComponent<Outline>();
+                taskTarget = hit.collider.gameObject;
 
-                if (outline != null && outline != previousOutline)
-                {
-                    
-                    if (previousOutline != null)
-                        previousOutline.enabled = false;
-                    outline.enabled = true;
-                    previousOutline = outline;
-                }
-
-                interactableDoor = door;
-                grabTarget = null;
                 return;
             }
         }
@@ -97,29 +87,34 @@ public class PlayerGrab : MonoBehaviour
 
         previousOutline = null;
         grabTarget = null;
+        taskTarget = null;
     }
 
 
     private void Grab()
     {
-        if (grabTarget != null && heldTarget == null)
+        if (grabTarget != null && heldObject == null)
         {
-            heldTarget = grabTarget;
-            Ingredient heldIngredients = heldTarget.GetComponent<Ingredient>();
+            heldObject = grabTarget;
+            Ingredient heldIngredients = heldObject.GetComponent<Ingredient>();
             float sizeChangeVal = heldIngredients.sizeChangeValue;
-            grabRb = heldTarget.GetComponent<Rigidbody>();
-            grabRb.isKinematic = true;
-            grabRb.useGravity = false;
+            grabRb = heldObject.GetComponent<Rigidbody>();
+            //grabRb.isKinematic = true;
+            //grabRb.useGravity = false;
 
-            heldCollider = heldTarget.GetComponent<Collider>();
+            heldCollider = heldObject.GetComponent<Collider>();
+
             if (heldCollider != null)
-                heldCollider.enabled = false;
+            {
+                //heldCollider.enabled = false;
+                StartCoroutine(DisableCollider(grabRb, heldCollider));
+            }
 
-            heldTarget.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-            heldTarget.transform.SetParent(handTransform);
-            heldTarget.transform.localPosition = Vector3.zero;
-            heldTargetNormalScale = heldTarget.transform.localScale;
-            heldTarget.transform.localScale = heldTarget.transform.localScale * sizeChangeVal;
+            heldObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+            heldObject.transform.SetParent(handTransform);
+            heldObject.transform.localPosition = Vector3.zero;
+            heldTargetNormalScale = heldObject.transform.localScale;
+            heldObject.transform.localScale = heldObject.transform.localScale * sizeChangeVal;
             //Debug.Log(heldTargetNormalScale + ", " + heldTarget.transform.localScale);
 
             gameManager.AudioPlayGrab();
@@ -129,14 +124,14 @@ public class PlayerGrab : MonoBehaviour
 
     private void Throw ()
     {
-        if (heldTarget != null)
+        if (heldObject != null)
         {
-            heldTarget.transform.parent = null;
-            heldTarget.transform.localScale = heldTargetNormalScale;
+            heldObject.transform.parent = null;
+            heldObject.transform.localScale = heldTargetNormalScale;
             grabRb.isKinematic = false;
             grabRb.useGravity = true;
 
-            heldCollider = heldTarget.GetComponent<Collider>();
+            heldCollider = heldObject.GetComponent<Collider>();
             if (heldCollider != null)
             {
                 heldCollider.enabled = true;
@@ -145,20 +140,17 @@ public class PlayerGrab : MonoBehaviour
             Transform cam = Camera.main.transform;
             Vector3 dropPos = cam.position + cam.forward * 1.2f;
             dropPos.y = transform.position.y + 2f;
-            heldTarget.transform.position = dropPos;
-
-
-            
+            heldObject.transform.position = dropPos;
 
             StartCoroutine(Audio_CanDropCoroutine());
 
-            heldTarget = null;
+            heldObject = null;
         }
     }
 
     private void MoveHand()
     {
-        if (heldTarget == null)
+        if (heldObject == null)
         {
             handTransform.localPosition = initalHandPos;
             return;
@@ -193,28 +185,45 @@ public class PlayerGrab : MonoBehaviour
         }
     }
 
+    IEnumerator DisableCollider(Rigidbody rb, Collider coll)
+    {
+        yield return new WaitForFixedUpdate();
+
+        rb.isKinematic = true;
+        coll.enabled = false;
+        rb.useGravity = false;
+
+        rb.gameObject.transform.SetParent(handTransform);
+    }
+
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed == false) return;
 
-        if (interactableDoor != null)
-        {
-            interactableDoor.ToggleDoor();
-            return;
-        }
-
+        
         if (grabTarget != null)
         {
-            if (heldTarget != null)
+            if (heldObject != null)
             {
                 Throw(); 
             }
-            Grab(); 
+            Grab();
             return;
         }
 
-        
-        if (heldTarget != null)
+        if (taskTarget != null && heldObject != null && heldObject.GetComponent<Ingredient>() != null && heldObject.GetComponent<Ingredient>().canBeCut)
+        {
+            CuttingBoard board = taskTarget.GetComponent<CuttingBoard>();
+
+            if (board != null)
+            {
+                board.CutIngredient(heldObject);
+                heldObject = null;
+                return;
+            }
+        }
+
+        if (heldObject != null)
         {
             Throw();
         }
