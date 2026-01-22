@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class Fade : MonoBehaviour
 {
-    
+    private MainMenu mainMenu;
+
     public CanvasGroup cg;
     void Start()
     {
@@ -14,7 +15,7 @@ public class Fade : MonoBehaviour
         }
 
         cg.alpha = 0f;
-        
+        mainMenu = FindAnyObjectByType<MainMenu>();
     }
 
     // Update is called once per frame
@@ -31,7 +32,7 @@ public class Fade : MonoBehaviour
     
     IEnumerator FadeInCoroutine ()
     {
-        
+        mainMenu.is_Started = true;
         for (float i = cg.alpha; i <= 1; i = i  +0.01f)
         {
             yield return new WaitForSeconds(0.01f);

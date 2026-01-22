@@ -8,7 +8,8 @@ public class MainMenu : MonoBehaviour
     public GameObject optionPanel;
 
     private Fade fade;
-    
+
+    public bool is_Started = false;
 
     void Start()
     {
@@ -25,6 +26,8 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickstart()
     {
+        if (is_Started == true) return;
+        
         fade.FadeIn();
         
         
@@ -32,17 +35,21 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickCredits ()
     {
-
+        if (is_Started == true) return;
     }
     
     public void OnClickOptions ()
     {
+        if (is_Started == true) return;
+        
         mainMenuPanel.SetActive(false);
         optionPanel.SetActive(true);
     }
      
     public void OnClickQuit ()
     {
+        if (is_Started == true) return;
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -53,6 +60,8 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickQuitOptions ()
     {
+        if (is_Started == true) return;
+
         mainMenuPanel.SetActive(true);
         optionPanel.SetActive(false);
     }

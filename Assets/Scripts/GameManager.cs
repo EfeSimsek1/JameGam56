@@ -31,10 +31,7 @@ public class GameManager : MonoBehaviour
         
         DontDestroyOnLoad(gameObject);
         
-        if (optionCanvas != null)
-        {
-            DontDestroyOnLoad(optionCanvas.gameObject);
-        }
+        
         
     }
 
