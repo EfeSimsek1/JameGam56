@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Book.SetActive(false);
+        if (Book != null) Book.SetActive(false);
 
         fpController.canLook = true;
         fpController.canMove = true;

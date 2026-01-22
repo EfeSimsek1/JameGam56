@@ -4145,7 +4145,7 @@ PrefabInstance:
       objectReference: {fileID: 326023914}
     - target: {fileID: 5535481087057361467, guid: 7fb5c772178617841b29d672c59c7390, type: 3}
       propertyPath: m_VersionIndex
-      value: 10
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7388821969960786259, guid: 7fb5c772178617841b29d672c59c7390, type: 3}
       propertyPath: m_Mesh
@@ -4642,13 +4642,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1669154764}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1e9fdacbf5e1fe4db690631854ba594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  audioMixer: {fileID: 0}
   SFX_AudioSource: {fileID: 0}
   BGM_AudioSource: {fileID: 0}
+  SFX_slider: {fileID: 0}
+  BGM_slider: {fileID: 0}
+  optionCanvas: {fileID: 0}
+  optionPanel: {fileID: 0}
   Grab: {fileID: 0}
   CanDrop: {fileID: 0}
 --- !u!4 &1669154766
@@ -5746,6 +5751,8 @@ MonoBehaviour:
   lookSensitivity: {x: 0.1, y: 0.1}
   pitchLimit: 85
   currentPitch: 0
+  canMove: 1
+  canLook: 1
   moveInput: {x: 0, y: 0}
   lookInput: {x: 0, y: 0}
   characterController: {fileID: 1921028363}
@@ -5763,6 +5770,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   fpController: {fileID: 1921028366}
+  playerInput: {fileID: 1921028365}
+  Book: {fileID: 0}
 --- !u!114 &1921028368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5775,7 +5784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7630d9459d3dc7b4a9b9b8b33746fc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerGrab
-  handTransform: {fileID: 1106798037}
+  handTransform: {fileID: 0}
   handFollowSpeed: 1
 --- !u!1001 &1948867692
 PrefabInstance:

@@ -29,6 +29,9 @@ public class FPController : MonoBehaviour
         }
     }
 
+    public bool canMove;
+    public bool canLook;
+
     [Header("Input")]
     public Vector2 moveInput;
     public Vector2 lookInput;
@@ -41,6 +44,8 @@ public class FPController : MonoBehaviour
     void Start()
     {
         currentState = PlayerState.FreeMove;
+        canMove = true;
+        canLook = false;
     }
 
     // Update is called once per frame
