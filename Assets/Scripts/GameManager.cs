@@ -12,16 +12,29 @@ public class GameManager : MonoBehaviour
     public Slider SFX_slider;
     public Slider BGM_slider;
 
-
+    public GameObject optionCanvas;
     public GameObject optionPanel;
 
     [Header("Audio Clips")]
     public AudioClip Grab;
     public AudioClip CanDrop;
 
+    public static GameManager instance;
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        
+        DontDestroyOnLoad(gameObject);
+        
+        if (optionCanvas != null)
+        {
+            DontDestroyOnLoad(optionCanvas.gameObject);
+        }
         
     }
 
@@ -55,13 +68,14 @@ public class GameManager : MonoBehaviour
 
     public void SetSFXVolume ()
     {
-        float value = SFX_slider.value;
+
+        float value = Mathf.Clamp(SFX_slider.value, 0.001f, 1f);
         audioMixer.SetFloat("SFX", Mathf.Log10(value) * 20);
     }
 
     public void SetBGMVolume()
     {
-        float value = BGM_slider.value;
+        float value = Mathf.Clamp(BGM_slider.value, 0.001f, 1f);
         audioMixer.SetFloat("BGM", Mathf.Log10(value) * 20);
         
     }
