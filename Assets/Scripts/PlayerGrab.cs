@@ -211,7 +211,7 @@ public class PlayerGrab : MonoBehaviour
             return;
         }
 
-        if (taskTarget != null && heldObject.GetComponent<Ingredient>().canBeCut)
+        if (taskTarget != null && heldObject != null && heldObject.GetComponent<Ingredient>() != null && heldObject.GetComponent<Ingredient>().canBeCut)
         {
             CuttingBoard board = taskTarget.GetComponent<CuttingBoard>();
 

@@ -7957,7 +7957,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: -1.19, y: 0.04, z: 1.19}
+  m_Size: {x: 1.19, y: 0.04, z: 1.19}
   m_Center: {x: 0, y: -0.25, z: 0}
 --- !u!33 &1160156107979023401
 MeshFilter:
@@ -10247,7 +10247,6 @@ GameObject:
   - component: {fileID: 8940758676013715079}
   - component: {fileID: 6626769691536456269}
   - component: {fileID: 1155620563696130879}
-  - component: {fileID: 6398248482506488741}
   - component: {fileID: 5277198928933973426}
   m_Layer: 0
   m_Name: Dinner Table
@@ -10747,7 +10746,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.011805574, y: 0.00792973, z: 0.009856855}
-  m_Center: {x: 0, y: -0.006261426, z: -0.00097435655}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &5378951569757017345
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -11320,29 +11319,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 543450651983117765}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6398248482506488741
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4681491385687563160}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.0013078535
-  m_Height: 0.0073023494
-  m_Direction: 1
-  m_Center: {x: -0.000040329694, y: -0.0063367644, z: -5.960465e-10}
 --- !u!23 &6444597428645223395
 MeshRenderer:
   m_ObjectHideFlags: 0
