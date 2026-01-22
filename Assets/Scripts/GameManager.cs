@@ -50,14 +50,14 @@ public class GameManager : MonoBehaviour
 
     public void AudioPlayCanDrop()
     {
-        if (SFX_AudioSource != null)
+        if (SFX_AudioSource != null && CanDrop != null)
         {
             SFX_AudioSource.PlayOneShot(CanDrop);
         }
     }
     public void AudioPlayGrab()
     {
-        if (SFX_AudioSource != null)
+        if (SFX_AudioSource != null && Grab != null)
         {
             SFX_AudioSource.PlayOneShot(Grab);
         }
