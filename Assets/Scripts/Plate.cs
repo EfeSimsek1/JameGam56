@@ -69,7 +69,7 @@ public class Plate : MonoBehaviour
         {
             if (combo.ingredients.Count == 0)
             {
-                playerDialogue.text = "An Apple, Sweet! Level Up! XD";
+                playerDialogue.text = "Ah, delicious... Well, time to go to bed";
                 // Win Game
                 won_game = true;
             }
