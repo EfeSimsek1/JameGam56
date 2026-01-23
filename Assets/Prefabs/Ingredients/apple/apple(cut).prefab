@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2700345815880257356}
   - component: {fileID: 747277390159176052}
   - component: {fileID: 7395912875734475166}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: apple
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -6415,7 +6415,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: 
   cutIngredient: {fileID: 0}
+  cutAnimLocalPos: {x: 0, y: 0, z: 0}
+  cutAnimLocalRotation: {x: 0, y: 0, z: 0}
+  canBeCut: 0
   sizeChangeValue: 1
 --- !u!114 &7395912875734475166
 MonoBehaviour:
@@ -6451,7 +6455,7 @@ GameObject:
   - component: {fileID: 3918521540614451524}
   - component: {fileID: 1006756850331573199}
   - component: {fileID: 5438023543963098043}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: apple (1)
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -12562,7 +12566,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: 
   cutIngredient: {fileID: 0}
+  cutAnimLocalPos: {x: 0, y: 0, z: 0}
+  cutAnimLocalRotation: {x: 0, y: 0, z: 0}
+  canBeCut: 0
   sizeChangeValue: 1
 --- !u!114 &5438023543963098043
 MonoBehaviour:
@@ -12591,7 +12599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5254820544761464086}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: apple(cut)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

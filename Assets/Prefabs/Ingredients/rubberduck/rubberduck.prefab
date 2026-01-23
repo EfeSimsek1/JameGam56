@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6587589651544652971}
   - component: {fileID: 6495270582757713528}
   - component: {fileID: 8696535478815496616}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: rubberduck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

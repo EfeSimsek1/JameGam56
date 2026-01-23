@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Ingredient : MonoBehaviour
 {
-
+    public string ingredientName;
     private Outline outline;
     [SerializeField] private GameObject cutIngredient;
     public Vector3 cutAnimLocalPos;
@@ -31,9 +31,11 @@ public class Ingredient : MonoBehaviour
         GameObject cutIngredientParent = Instantiate(cutIngredient, gameObject.transform.position, gameObject.transform.rotation);
         Transform child1 = cutIngredientParent.transform.GetChild(0);
         child1.parent = null;
+        child1.GetComponent<Ingredient>().ingredientName = ingredientName + " slice";
 
         Transform child2 = cutIngredientParent.transform.GetChild(0);
         child2.parent = null;
+        child2.GetComponent<Ingredient>().ingredientName = ingredientName + " slice";
         Destroy(gameObject);
     }
 }

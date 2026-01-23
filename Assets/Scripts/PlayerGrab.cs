@@ -28,6 +28,8 @@ public class PlayerGrab : MonoBehaviour
     private Vector3 heldTargetNormalScale;
     Vector3 initalHandPos;
 
+    [SerializeField] LayerMask interactable;
+
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
@@ -47,7 +49,7 @@ public class PlayerGrab : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 2f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 2f, interactable))
         {
             #region Set Outline
 
@@ -221,6 +223,11 @@ public class PlayerGrab : MonoBehaviour
                 heldObject = null;
                 return;
             }
+        }
+
+        if(taskTarget != null && taskTarget.GetComponent<Bell>() != null)
+        {
+            taskTarget.GetComponent<Bell>().Ring();
         }
 
         if (heldObject != null)

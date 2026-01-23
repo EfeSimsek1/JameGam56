@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4544387549354825625}
   - component: {fileID: 5938329904092763960}
   - component: {fileID: 8425325704697428045}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: peach
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: peach
   cutIngredient: {fileID: 3379307639617504421, guid: bb81274e30f21f84ea19d5f3af1b0cd9, type: 3}
   cutAnimLocalPos: {x: 0, y: 0.1647995, z: 0.131}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}

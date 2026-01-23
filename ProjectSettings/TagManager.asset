@@ -7,11 +7,12 @@ TagManager:
   - Grabbable
   - Ground
   - HighlightOnly
+  - Task
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Interactable
   - Water
   - UI
   - 

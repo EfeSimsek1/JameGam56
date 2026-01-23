@@ -40,7 +40,7 @@ public class Fade : MonoBehaviour
             
             
         }
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
 }
 

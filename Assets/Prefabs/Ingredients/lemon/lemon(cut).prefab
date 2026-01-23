@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8905398058055240216}
   - component: {fileID: 4919493186914937403}
   - component: {fileID: 597029825604774793}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: lemon
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: lemon slice
   cutIngredient: {fileID: 0}
   cutAnimLocalPos: {x: 0, y: 0, z: 0}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}
@@ -1166,7 +1167,7 @@ GameObject:
   - component: {fileID: 3801064844191408656}
   - component: {fileID: 1818862726629065727}
   - component: {fileID: 3502713272208113834}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: lemon (1)
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -1257,6 +1258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: lemon slice
   cutIngredient: {fileID: 0}
   cutAnimLocalPos: {x: 0, y: 0, z: 0}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}
@@ -2309,7 +2311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2101014744921463167}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: lemon(cut)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

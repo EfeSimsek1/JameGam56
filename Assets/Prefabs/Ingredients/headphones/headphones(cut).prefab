@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8428493753829089725}
   - component: {fileID: 8208647430945815370}
   - component: {fileID: 7923579180049522260}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: headphonesrighthalf
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -3497,7 +3497,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: 
   cutIngredient: {fileID: 0}
+  cutAnimLocalPos: {x: 0, y: 0, z: 0}
+  cutAnimLocalRotation: {x: 0, y: 0, z: 0}
+  canBeCut: 0
   sizeChangeValue: 1
 --- !u!114 &7923579180049522260
 MonoBehaviour:
@@ -3533,7 +3537,7 @@ GameObject:
   - component: {fileID: 3983604548621057854}
   - component: {fileID: 5654726440216539737}
   - component: {fileID: 4401295563630479024}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: headphonelefthalf
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -7014,7 +7018,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: 
   cutIngredient: {fileID: 0}
+  cutAnimLocalPos: {x: 0, y: 0, z: 0}
+  cutAnimLocalRotation: {x: 0, y: 0, z: 0}
+  canBeCut: 0
   sizeChangeValue: 1
 --- !u!114 &4401295563630479024
 MonoBehaviour:
@@ -7043,7 +7051,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6016880436904395151}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: headphones(cut)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3606738213830052025}
   - component: {fileID: 8165265400550097390}
   - component: {fileID: 1147240716855131934}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2347,7 +2347,7 @@ GameObject:
   - component: {fileID: 1054318749935501598}
   - component: {fileID: 2286514371871866205}
   - component: {fileID: 902797974914703304}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: apple
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -14375,6 +14375,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: 
+  cutIngredient: {fileID: 0}
+  cutAnimLocalPos: {x: 0, y: 0, z: 0}
+  cutAnimLocalRotation: {x: 0, y: 0, z: 0}
+  canBeCut: 0
   sizeChangeValue: 1
 --- !u!114 &902797974914703304
 MonoBehaviour:

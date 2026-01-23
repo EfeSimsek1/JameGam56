@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1319651295652812034}
   - component: {fileID: 5535481087057361467}
   - component: {fileID: 9082685739255810376}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: lemon
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: lemon
   cutIngredient: {fileID: 7433147081763078470, guid: 08cdde231f148fa4eb0e3e57371d9f3f, type: 3}
   cutAnimLocalPos: {x: 0.101, y: 0.1713915, z: 0.183}
   cutAnimLocalRotation: {x: -50.732, y: -180, z: 90}

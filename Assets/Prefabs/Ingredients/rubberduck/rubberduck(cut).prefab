@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 412573094401619364}
   - component: {fileID: 2158049245423543936}
   - component: {fileID: 1314792957294223052}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: rubberduckrighthalf
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: 
   cutIngredient: {fileID: 0}
   cutAnimLocalPos: {x: 0, y: 0, z: 0}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}
@@ -6334,7 +6335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2521273815011934552}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: rubberduck(cut)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6374,7 +6375,7 @@ GameObject:
   - component: {fileID: 3696961730089884224}
   - component: {fileID: 3408754610238208165}
   - component: {fileID: 3984973110944010717}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: rubberducklefthalf
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -6513,6 +6514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: 
   cutIngredient: {fileID: 0}
   cutAnimLocalPos: {x: 0, y: 0, z: 0}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}

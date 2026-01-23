@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 302969104645032325}
   - component: {fileID: 2264334909597211208}
   - component: {fileID: 6195267427372313853}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: headphones
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -172,7 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: 
   cutIngredient: {fileID: 6971762500325037423, guid: 80acacf490e810d45957abfaed329dcb, type: 3}
   cutAnimLocalPos: {x: 0.84, y: 0.186, z: 0}
   cutAnimLocalRotation: {x: 93.79901, y: 93.79901, z: 0}
+  canBeCut: 0
   sizeChangeValue: 1

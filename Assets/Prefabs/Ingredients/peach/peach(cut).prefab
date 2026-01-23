@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4739368083516733704}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: peach(cut)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 7308763822318821306}
   - component: {fileID: 5681029271300603811}
   - component: {fileID: 5809431509264276811}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: peach
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -1112,6 +1112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: peach slice
   cutIngredient: {fileID: 0}
   cutAnimLocalPos: {x: 0, y: 0, z: 0}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}
@@ -1133,7 +1134,7 @@ GameObject:
   - component: {fileID: 4608075530371824946}
   - component: {fileID: 411554966579466606}
   - component: {fileID: 7112253280029720356}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: peach (1)
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -2124,6 +2125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
+  ingredientName: peach slice
   cutIngredient: {fileID: 0}
   cutAnimLocalPos: {x: 0, y: 0, z: 0}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}
