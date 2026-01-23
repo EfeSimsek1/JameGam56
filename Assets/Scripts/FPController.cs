@@ -106,10 +106,19 @@ public class FPController : MonoBehaviour
         yield return null;
     }
 
+    public void PausePlayer()
+    {
+        currentState = PlayerState.Locked;
+    }
+
+    public void ResumePlayer()
+    {
+        currentState = PlayerState.FreeMove;
+    }
+
     public enum PlayerState
     {
         FreeMove,
-        CameraTransition,
-        InTask
+        Locked
     }
 }
