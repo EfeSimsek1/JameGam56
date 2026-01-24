@@ -18,6 +18,8 @@ public class PlayerGrab : MonoBehaviour
     GameObject taskTarget;
     Rigidbody grabRb;
     Collider heldCollider;
+    [SerializeField] private Pottext pottext;
+
 
     [SerializeField]
     public Transform handTransform;
@@ -30,10 +32,15 @@ public class PlayerGrab : MonoBehaviour
 
     [SerializeField] LayerMask interactable;
 
+    [HideInInspector] public string ingredientName = null;
+    private Pot lookingPot = null;
     private void Start()
     {
+        
+        
         gameManager = FindFirstObjectByType<GameManager>();
         initalHandPos = handTransform.localPosition;
+
     }
     void Update()
     {
@@ -75,6 +82,14 @@ public class PlayerGrab : MonoBehaviour
                 return;
             }
 
+            Pot pot = hit.collider.GetComponent<Pot>();
+            if (pot != null)
+            {
+                taskTarget = hit.collider.gameObject;
+                lookingPot = pot;
+                return;
+            }
+
             if (hit.collider.CompareTag("Task"))
             {
                 taskTarget = hit.collider.gameObject;
@@ -90,6 +105,7 @@ public class PlayerGrab : MonoBehaviour
         previousOutline = null;
         grabTarget = null;
         taskTarget = null;
+        lookingPot = null;
     }
 
 
@@ -111,6 +127,12 @@ public class PlayerGrab : MonoBehaviour
                 //heldCollider.enabled = false;
                 StartCoroutine(DisableCollider(grabRb, heldCollider));
             }
+
+            Ingredient ingredient = heldObject.GetComponent<Ingredient>();
+            ingredientName = ingredient.ingredientName;
+
+
+
 
             heldObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
             heldObject.transform.SetParent(handTransform);
@@ -147,6 +169,7 @@ public class PlayerGrab : MonoBehaviour
             StartCoroutine(Audio_CanDropCoroutine());
 
             heldObject = null;
+            ingredientName = null;
         }
     }
 
@@ -216,6 +239,21 @@ public class PlayerGrab : MonoBehaviour
             return;
         }
 
+        if (lookingPot != null)
+        {
+            if (heldObject != null)
+            {
+                lookingPot.PutIngredient(heldObject);
+                heldObject = null;
+                ingredientName = null;
+            }
+            if (heldObject == null)
+            {                
+                pottext.IngredientsPutTextZero();
+            }
+        }
+        
+
         if (taskTarget != null && heldObject != null && heldObject.GetComponent<Ingredient>() != null && heldObject.GetComponent<Ingredient>().canBeCut)
         {
             CuttingBoard board = taskTarget.GetComponent<CuttingBoard>();
@@ -224,6 +262,7 @@ public class PlayerGrab : MonoBehaviour
             {
                 board.CutIngredient(heldObject);
                 heldObject = null;
+                ingredientName = null;
                 return;
             }
         }
