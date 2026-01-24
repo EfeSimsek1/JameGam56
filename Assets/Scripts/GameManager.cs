@@ -1,11 +1,6 @@
-using NUnit.Framework;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -33,20 +28,24 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
-
+        
         DontDestroyOnLoad(gameObject);
+        
+        
+        
     }
 
     void Start()
     {
-        if (SFX_slider != null) SFX_slider.value = 1;
-        if (BGM_slider != null) BGM_slider.value = 1;
-        if (optionPanel != null) optionPanel.gameObject.SetActive(false);
+        SFX_slider.value = 1;
+        BGM_slider.value = 1;
+        optionPanel.gameObject.SetActive(false);
     }
 
+    
     void Update()
     {
-
+        
     }
 
     public void AudioPlayCanDrop()
@@ -56,7 +55,6 @@ public class GameManager : MonoBehaviour
             SFX_AudioSource.PlayOneShot(CanDrop);
         }
     }
-
     public void AudioPlayGrab()
     {
         if (SFX_AudioSource != null && Grab != null)
@@ -65,7 +63,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetSFXVolume()
+    public void SetSFXVolume ()
     {
 
         float value = Mathf.Clamp(SFX_slider.value, 0.001f, 1f);
@@ -76,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         float value = Mathf.Clamp(BGM_slider.value, 0.001f, 1f);
         audioMixer.SetFloat("BGM", Mathf.Log10(value) * 20);
-
+        
     }
+
 }

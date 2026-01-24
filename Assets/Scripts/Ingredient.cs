@@ -3,7 +3,6 @@
 public class Ingredient : MonoBehaviour
 {
     public string ingredientName;
-<<<<<<< HEAD
     public string ingredientType;
 
     [SerializeField] private GameObject cutPrefab; // 썰린 조각 프리팹
@@ -11,20 +10,8 @@ public class Ingredient : MonoBehaviour
     public Vector3 cutAnimLocalRotation;
     [SerializeField] private float splitOffset = 0.1f;
 
-=======
->>>>>>> main
     private Outline outline;
-    [SerializeField] private GameObject cutIngredient;
-    public Vector3 cutAnimLocalPos;
-    public Vector3 cutAnimLocalRotation;
-    public bool canBeCut;
 
-<<<<<<< HEAD
-=======
-
-    [Tooltip("0.1 ~ 1")]  public float sizeChangeValue = 1f;
-
->>>>>>> main
     void Start()
     {
         outline = GetComponent<Outline>();
@@ -35,7 +22,6 @@ public class Ingredient : MonoBehaviour
 
     public void SetHighlight(bool on)
     {
-<<<<<<< HEAD
         if (outline != null) outline.enabled = on;
     }
 
@@ -61,23 +47,5 @@ public class Ingredient : MonoBehaviour
         }
 
         Destroy(gameObject); // 원본 삭제
-=======
-        canBeCut = cutIngredient != null;
-    }
-
-    public void Cut()
-    {
-        if (!cutIngredient) return;
-
-        GameObject cutIngredientParent = Instantiate(cutIngredient, gameObject.transform.position, gameObject.transform.rotation);
-        Transform child1 = cutIngredientParent.transform.GetChild(0);
-        child1.parent = null;
-        child1.GetComponent<Ingredient>().ingredientName = ingredientName + " slice";
-
-        Transform child2 = cutIngredientParent.transform.GetChild(0);
-        child2.parent = null;
-        child2.GetComponent<Ingredient>().ingredientName = ingredientName + " slice";
-        Destroy(gameObject);
->>>>>>> main
     }
 }

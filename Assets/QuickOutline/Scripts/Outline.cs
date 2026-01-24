@@ -192,10 +192,7 @@ public class Outline : MonoBehaviour {
       var smoothNormals = (index >= 0) ? bakeValues[index].data : SmoothNormals(meshFilter.sharedMesh);
 
       // Store smooth normals in UV3
-      if (meshFilter.sharedMesh != null)
-            {
-                meshFilter.sharedMesh.SetUVs(3, smoothNormals);
-            }
+      meshFilter.sharedMesh.SetUVs(3, smoothNormals);
 
       // Combine submeshes
       var renderer = meshFilter.GetComponent<Renderer>();
@@ -224,7 +221,6 @@ public class Outline : MonoBehaviour {
   List<Vector3> SmoothNormals(Mesh mesh) {
 
     // Group vertices by location
-    if (mesh == null) return null;
     var groups = mesh.vertices.Select((vertex, index) => new KeyValuePair<Vector3, int>(vertex, index)).GroupBy(pair => pair.Key);
 
     // Copy normals to a new list
@@ -257,7 +253,7 @@ public class Outline : MonoBehaviour {
   }
 
   void CombineSubmeshes(Mesh mesh, Material[] materials) {
-        if (mesh == null) return;
+
     // Skip meshes with a single submesh
     if (mesh.subMeshCount == 1) {
       return;

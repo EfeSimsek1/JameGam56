@@ -34,12 +34,8 @@ Transform:
   m_LocalPosition: {x: 0.805, y: 1.401, z: 0.572}
   m_LocalScale: {x: 18.950401, y: 18.950401, z: 18.950401}
   m_ConstrainProportionsScale: 1
-<<<<<<< HEAD
   m_Children:
   - {fileID: 5659770925072199772}
-=======
-  m_Children: []
->>>>>>> main
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -57, y: 0, z: 90}
 --- !u!33 &498108532762236413
@@ -178,7 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: 
-<<<<<<< HEAD
   ingredientType: 
   cutIngredient: {fileID: 0}
   cutAnimLocalPos: {x: 0, y: 0, z: 0}
@@ -362,10 +357,3 @@ MonoBehaviour:
   cutAnimLocalPos: {x: 0, y: 0, z: 0}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}
   splitOffset: 0.05
-=======
-  cutIngredient: {fileID: 0}
-  cutAnimLocalPos: {x: 0, y: 0, z: 0}
-  cutAnimLocalRotation: {x: 0, y: 0, z: 0}
-  canBeCut: 0
-  sizeChangeValue: 1
->>>>>>> main

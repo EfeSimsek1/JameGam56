@@ -28,7 +28,9 @@ public class MainMenu : MonoBehaviour
     {
         if (is_Started == true) return;
         
-        fade.FadeOut("Level1", 2f);
+        fade.FadeIn();
+        
+        
     }
 
     public void OnClickCredits ()

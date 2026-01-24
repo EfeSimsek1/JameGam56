@@ -27,17 +27,9 @@ public class Player : MonoBehaviour
         fpController.lookInput = context.ReadValue<Vector2>();
     }
 
-    public void OnOpenBook(InputAction.CallbackContext context)
-    { 
-        if (context.performed)
-        {
-            ToggleBook();
-        }
-    }
-
     private void Start()
     {
-        if (Book != null) Book.SetActive(false);
+        Book.SetActive(false);
 
         fpController.canLook = true;
         fpController.canMove = true;
@@ -52,6 +44,14 @@ public class Player : MonoBehaviour
         if (playerInput == null) playerInput = GetComponent<PlayerInput>();
     }
 
+    private void Update()
+    {
+        if (Keyboard.current.fKey.wasPressedThisFrame)
+        {
+            ToggleBook();
+        }
+    }
+
     private void ToggleBook()
     {
         isLookingAtBook = !isLookingAtBook;
@@ -62,16 +62,9 @@ public class Player : MonoBehaviour
         fpController.canLook = !isLookingAtBook;
         fpController.canMove = !isLookingAtBook;
 
+        
+        playerInput.enabled = !isLookingAtBook;
 
-        //playerInput.enabled = !isLookingAtBook;
-        if (isLookingAtBook)
-        {
-            fpController.PausePlayer();
-        }
-        else
-        {
-            fpController.ResumePlayer();
-        }
         
         Cursor.lockState = isLookingAtBook
             ? CursorLockMode.None
