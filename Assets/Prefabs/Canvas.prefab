@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4958319587260360335}
   m_Layer: 0
-  m_Name: page 15 water
+  m_Name: page 12 water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4431556542800344226
 Transform:
   m_ObjectHideFlags: 0
@@ -1230,7 +1230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6715905193072715271}
   m_Layer: 0
-  m_Name: page 12 flour
+  m_Name: page 9 flour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1336,7 +1336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4370643765624269895}
   m_Layer: 0
-  m_Name: page 8 - tomato
+  m_Name: page 5 - tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1370,7 +1370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841029308038614493}
   m_Layer: 0
-  m_Name: page 14 beef
+  m_Name: page 11 beef
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1540,7 +1540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8829661675261133191}
   m_Layer: 0
-  m_Name: page 10 chili pepper
+  m_Name: page 7 chili pepper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1574,7 +1574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 464689697408825763}
   m_Layer: 0
-  m_Name: page 9 - green onion
+  m_Name: page 6 - green onion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2021,7 +2021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3748067325400501253}
   m_Layer: 0
-  m_Name: page 11 salt
+  m_Name: page 8 salt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2442,6 +2442,8 @@ MonoBehaviour:
   pages:
   - {fileID: 8021041610637685708}
   - {fileID: 7216410666209643718}
+  - {fileID: 4431556542800344226}
+  - {fileID: 5565948844825615898}
   - {fileID: 4370643765624269895}
   - {fileID: 464689697408825763}
   - {fileID: 8829661675261133191}
@@ -3403,7 +3405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2666864002375754167}
   m_Layer: 0
-  m_Name: page 13 rice
+  m_Name: page 10 rice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3696,7 +3698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8021041610637685708
 Transform:
   m_ObjectHideFlags: 0
@@ -4447,7 +4449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7216410666209643718
 Transform:
   m_ObjectHideFlags: 0
