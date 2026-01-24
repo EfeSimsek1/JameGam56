@@ -2263,8 +2263,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
-  m_sharedMaterial: {fileID: -3984631585454866111, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
+  m_sharedMaterial: {fileID: 7915841995405996304, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2403,7 +2403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c04a7226083f24cba10c28e43c2b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fade
-  cg: {fileID: 505062340}
 --- !u!114 &505062342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3615,8 +3614,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
-  m_sharedMaterial: {fileID: -3984631585454866111, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
+  m_sharedMaterial: {fileID: 7915841995405996304, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4372,8 +4371,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: The Mix
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
-  m_sharedMaterial: {fileID: -3984631585454866111, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
+  m_sharedMaterial: {fileID: 7915841995405996304, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9358,8 +9357,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
-  m_sharedMaterial: {fileID: -3984631585454866111, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
+  m_sharedMaterial: {fileID: 7915841995405996304, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9749,8 +9748,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Option
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
-  m_sharedMaterial: {fileID: -3984631585454866111, guid: db5a446ad5ca71c4e86137b1a95f4cbc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
+  m_sharedMaterial: {fileID: 7915841995405996304, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14643,7 +14642,10 @@ MonoBehaviour:
     - apple slice
     - apple slice
   virtual_cam: {fileID: 0}
-  playerDialogue: {fileID: 0}
+  unsatisfiedMealLinesSingular: []
+  unsatisfiedMealLinesPlural: []
+  satisfiedMealLines: []
+  emptyPlateLines: []
 --- !u!1001 &1203080119650396922
 PrefabInstance:
   m_ObjectHideFlags: 0

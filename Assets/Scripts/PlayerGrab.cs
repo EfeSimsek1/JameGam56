@@ -202,6 +202,9 @@ public class PlayerGrab : MonoBehaviour
     {
         if (context.performed == false) return;
 
+        DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
+        if (dialogueManager) dialogueManager.dialogueIndex++;
+
         
         if (grabTarget != null)
         {
@@ -235,7 +238,4 @@ public class PlayerGrab : MonoBehaviour
             Throw();
         }
     }
-
-
-
 }

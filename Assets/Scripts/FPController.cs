@@ -43,7 +43,7 @@ public class FPController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentState = PlayerState.FreeMove;
+        //currentState = PlayerState.FreeMove;
         canMove = true;
         canLook = false;
     }
