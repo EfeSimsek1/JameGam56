@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class Fade : MonoBehaviour
 {
@@ -31,6 +32,19 @@ public class Fade : MonoBehaviour
     {
         StartCoroutine(FadeOutCoroutine(sceneName, duration));
     }
+
+    public void FadeOutNextLevel(float duration)
+    {
+        if(SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCount)
+        {
+            StartCoroutine(FadeOutCoroutine((SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex)).name, 3f));
+        }
+        else
+        {
+            //Bring to "Thank you for playing our game!" page
+            FadeOut("Main Menu", duration);
+        }
+    }
     
     IEnumerator FadeOutCoroutine(string sceneName, float duration)
     {
@@ -43,6 +57,7 @@ public class Fade : MonoBehaviour
         }
 
         SceneManager.LoadScene(sceneName);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     IEnumerator FadeIn()

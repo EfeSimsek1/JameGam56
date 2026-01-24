@@ -1519,8 +1519,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465707022}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.9982861, z: 0, w: 0.058522496}
-  m_LocalPosition: {x: -0.000056661665, y: 2.0199997, z: 3.237186}
+  m_LocalRotation: {x: 0, y: 0.6898414, z: 0, w: 0.7239606}
+  m_LocalPosition: {x: -2.234507, y: 2.0199997, z: -0.4892971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1686,9 +1686,11 @@ MonoBehaviour:
   dialogueIndex: 0
   inDialogue: 0
   startingDialogue:
-  - a
-  - b
-  - c
+  - Phew, what a tiring day at work.
+  - I barely have enough energy to make myself something to eat...
+  - The doctor told me to have 2 apple slices tonight.
+  - I should take a look at my doctor's notes before I do anything.
+  - '[Press TAB to open notebook]'
 --- !u!4 &473819873
 Transform:
   m_ObjectHideFlags: 0
@@ -2691,7 +2693,7 @@ PrefabInstance:
     - {fileID: 2613139152669232136, guid: 5bd083b5dd2144d4a86b413cf27eb2d7, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8344587838328378919, guid: 5bd083b5dd2144d4a86b413cf27eb2d7, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 1811411348}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bd083b5dd2144d4a86b413cf27eb2d7, type: 3}
@@ -8892,14 +8894,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921028362}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.9982861, z: 0, w: 0.058522496}
-  m_LocalPosition: {x: 0, y: 0.0799998, z: 3.793}
+  m_LocalRotation: {x: -0, y: 0.6898414, z: -0, w: 0.7239606}
+  m_LocalPosition: {x: -2.789, y: 0.0799998, z: -0.451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 759550314}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 173.29, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 87.235, z: 0}
 --- !u!114 &1921028365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9658,13 +9660,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005184856}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.007823059, y: 0.99160653, z: -0.12885259, w: -0.007236326}
-  m_LocalPosition: {x: 1.93, y: 1.94, z: -1.23}
+  m_LocalRotation: {x: 0.006819307, y: 0.99994296, z: 0.0007397036, w: -0.008189124}
+  m_LocalPosition: {x: 0.895, y: 1.29, z: 0.536}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 14.799, y: 180.97, z: 1.03}
+  m_LocalEulerAnglesHint: {x: -0.091, y: 180.938, z: 0.781}
 --- !u!1 &2031212724
 GameObject:
   m_ObjectHideFlags: 0
@@ -11603,15 +11605,22 @@ MonoBehaviour:
     - apple slice
     - apple slice
   virtual_cam: {fileID: 1553466511}
+  death_virtual_cam: {fileID: 2005184856}
   unsatisfiedMealLinesSingular:
-  - This isn't an apple.
+  - This isn't what I need tonight
   unsatisfiedMealLinesPlural:
-  - I want ONLY an apple.
+  - None of these are what I need tonight.
   satisfiedMealLines:
   - Looks like this one was it.
+  - Alright, I've eaten everything I've wanted to eat tonight.
   - Well, time to go to bed
+  partialMatchLines:
+  - Judging by the taste, one of these were right.
   emptyPlateLines:
-  - I didn't put anything on the plate yet.
+  - I haven't put anything on the plate yet.
+  dyingLines:
+  - ugh... what is this feeling...
+  - am I... dying?
 --- !u!1001 &1203080119650396922
 PrefabInstance:
   m_ObjectHideFlags: 0
