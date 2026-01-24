@@ -4,15 +4,18 @@ using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject creditPanel;
     public GameObject mainMenuPanel;
     public GameObject optionPanel;
 
+    [SerializeField] private Credit credit;
     private Fade fade;
 
     public bool is_Started = false;
 
     void Start()
     {
+        creditPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
         optionPanel.SetActive(false);
         fade = FindFirstObjectByType<Fade>();
@@ -34,6 +37,11 @@ public class MainMenu : MonoBehaviour
     public void OnClickCredits ()
     {
         if (is_Started == true) return;
+        credit.creditStart = true;
+        creditPanel.SetActive(true);
+        mainMenuPanel.SetActive(false);
+        optionPanel.SetActive(false);
+
     }
     
     public void OnClickOptions ()
