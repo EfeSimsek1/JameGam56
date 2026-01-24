@@ -1,9 +1,13 @@
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class FPController : MonoBehaviour
 {
+    PlayerState currentState;
+
     [Header("Movement Parameters")]
     public float maxSpeed = 3.5f;
     public float acceleration = 15f;
@@ -15,9 +19,6 @@ public class FPController : MonoBehaviour
     public Vector2 lookSensitivity = new Vector2(0.1f, 0.1f);
     public float pitchLimit = 85f;
     [SerializeField] float currentPitch = 0f;
-    public bool canLook = true;
-    public bool canMove = true;
-
     public float CurrentPitch
     {
         get => currentPitch;
@@ -28,32 +29,37 @@ public class FPController : MonoBehaviour
         }
     }
 
+    public bool canMove;
+    public bool canLook;
+
     [Header("Input")]
     public Vector2 moveInput;
     public Vector2 lookInput;
 
     [Header("Components")]
     [SerializeField] public CharacterController characterController;
-    [SerializeField] public Camera fpCamera;
+    [SerializeField] public GameObject fpCamera;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        //currentState = PlayerState.FreeMove;
+        canMove = true;
+        canLook = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveUpdate();
-
-        LookUpdate();
+        if (currentState == PlayerState.FreeMove)
+        {
+            MoveUpdate();
+            LookUpdate();
+        }
     }
 
     private void MoveUpdate()
     {
-        if (canMove == false) return;
-
         Vector3 motion = transform.forward * moveInput.y + transform.right * moveInput.x;
         motion.y = 0;
         motion.Normalize();
@@ -79,8 +85,6 @@ public class FPController : MonoBehaviour
 
     private void LookUpdate()
     {
-        if (canLook == false) return;
-        
         //looking up and down
         Vector2 input = new Vector2(lookInput.x * lookSensitivity.x, lookInput.y * lookSensitivity.y);
 
@@ -97,4 +101,24 @@ public class FPController : MonoBehaviour
         if (characterController == null) characterController = GetComponent<CharacterController>();
     }
 
+    IEnumerator TransitionCamera()
+    {
+        yield return null;
+    }
+
+    public void PausePlayer()
+    {
+        currentState = PlayerState.Locked;
+    }
+
+    public void ResumePlayer()
+    {
+        currentState = PlayerState.FreeMove;
+    }
+
+    public enum PlayerState
+    {
+        FreeMove,
+        Locked
+    }
 }

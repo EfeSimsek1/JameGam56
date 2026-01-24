@@ -7,16 +7,20 @@ TagManager:
   - Grabbable
   - Ground
   - HighlightOnly
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
   - Task
   - Pot
 >>>>>>> Stashed changes
+=======
+  - Task
+>>>>>>> main
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Interactable
   - Water
   - UI
   - 

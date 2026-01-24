@@ -1,7 +1,21 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: d14b3b6111160e54699b728005100aa8
+=======
+guid: 99c9720ab356a0642a771bea13969a05
+>>>>>>> main
 DefaultImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314619
+  packageName: Functional Washing Machines
+  packageVersion: 1.0.0
+  assetPath: Assets/Washing Machines/FunctionalWashingMachines_URP.unitypackage
+  uploadId: 744231
+=======
+>>>>>>> main
