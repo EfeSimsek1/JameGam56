@@ -6,14 +6,15 @@ public class Pot : MonoBehaviour
     private PlayerGrab playergrab;
     private GameManager gamemanager;
     public Pottext pottext;
-
+    public Dish dish;
     
     public List<string> ingredients = new List<string>();
     private Outline outline;
 
     private void Start()
     {
-        
+        dish.gameObject.SetActive(false);
+
         playergrab = FindAnyObjectByType<PlayerGrab>();
         gamemanager = FindAnyObjectByType<GameManager>();
         outline = GetComponent<Outline>();
@@ -29,7 +30,7 @@ public class Pot : MonoBehaviour
 
         string ingredientName = ingredientComp.ingredientName;
         ingredients.Add(ingredientName); 
-        Debug.Log("put : " + ingredientName);
+        Debug.Log(ingredientName);
 
         
         if (pottext != null)
@@ -37,5 +38,13 @@ public class Pot : MonoBehaviour
 
         Destroy(ingredientObject);
     }
+
+    public void MakeDish (string dishType)
+    {
+        dish.dishType = dishType;
+        dish.gameObject.SetActive(true);
+    }
+
+
 
 }

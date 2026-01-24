@@ -20,7 +20,7 @@ public class Pottext : MonoBehaviour
 
     public void IngredientsPutTextZero()
     {
-        Debug.Log("Zero");
+        
         if (!isShowingText)
         {
             if (currentCoroutine != null) StopCoroutine(currentCoroutine);
@@ -30,11 +30,20 @@ public class Pottext : MonoBehaviour
 
     public void IngredientsPutText()
     {
-        Debug.Log("Put");
+        
         if (!isShowingText)
         {
             if (currentCoroutine != null) StopCoroutine(currentCoroutine);
             currentCoroutine = StartCoroutine(PutCoroutine(waitTime));
+        }
+    }
+
+    public void MakeFoodText()
+    {
+        if (!isShowingText)
+        {
+            if (currentCoroutine != null) StopCoroutine(currentCoroutine);
+            currentCoroutine = StartCoroutine(MakeDishTextCoroutine(waitTime));
         }
     }
 
@@ -65,4 +74,15 @@ public class Pottext : MonoBehaviour
         isShowingText = false; 
     }
 
+    private IEnumerator MakeDishTextCoroutine (float waitTime)
+    {
+        isShowingText = true;
+
+        potText.text = "You finally made something..\n We don't know what is it.";
+
+        yield return new WaitForSeconds(waitTime + 1.4f);
+
+        potText.text = null;
+        isShowingText = false;
+    }
 }

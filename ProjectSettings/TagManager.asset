@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - HighlightOnly
   - Task
+  - Pot
+  - Pot Button
   layers:
   - Default
   - TransparentFX

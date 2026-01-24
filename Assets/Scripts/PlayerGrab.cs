@@ -1,5 +1,6 @@
 using NUnit.Framework.Constraints;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -19,7 +20,8 @@ public class PlayerGrab : MonoBehaviour
     Rigidbody grabRb;
     Collider heldCollider;
     [SerializeField] private Pottext pottext;
-
+    [SerializeField] private Dish dish;
+    [SerializeField] private PotButton potButton;
 
     [SerializeField]
     public Transform handTransform;
@@ -34,10 +36,11 @@ public class PlayerGrab : MonoBehaviour
 
     [HideInInspector] public string ingredientName = null;
     private Pot lookingPot = null;
+    private PotButton lookingPotButton = null;
     private void Start()
     {
-        
-        
+
+        dish.gameObject.SetActive(false);
         gameManager = FindFirstObjectByType<GameManager>();
         initalHandPos = handTransform.localPosition;
 
@@ -79,6 +82,14 @@ public class PlayerGrab : MonoBehaviour
                 GameObject newTarget = hit.collider.gameObject;
 
                 grabTarget = newTarget;
+                return;
+            }
+
+            PotButton potButton = hit.collider.GetComponent<PotButton>();
+            if (potButton != null)
+            {
+                taskTarget = hit.collider.gameObject;
+                lookingPotButton = potButton;
                 return;
             }
 
@@ -228,6 +239,8 @@ public class PlayerGrab : MonoBehaviour
         DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
         if (dialogueManager) dialogueManager.dialogueIndex++;
 
+
+        
         
         if (grabTarget != null)
         {
@@ -253,6 +266,13 @@ public class PlayerGrab : MonoBehaviour
             }
         }
         
+        if (lookingPotButton != null)
+        {
+            pottext.MakeFoodText();
+            potButton.MakeDish();
+            dish.gameObject.SetActive(true);
+            Debug.Log(dish.dishType);
+        }
 
         if (taskTarget != null && heldObject != null && heldObject.GetComponent<Ingredient>() != null && heldObject.GetComponent<Ingredient>().canBeCut)
         {
