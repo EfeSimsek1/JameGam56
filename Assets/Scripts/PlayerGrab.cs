@@ -6,11 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerGrab : MonoBehaviour
 {
-
     GameManager gameManager;
-    
+
     //Ray from Player camera
-    
     RaycastHit hit;
 
     GameObject grabTarget;
@@ -28,23 +26,27 @@ public class PlayerGrab : MonoBehaviour
     private Vector3 heldTargetNormalScale;
     Vector3 initalHandPos;
 
+    private FridgeDoor interactableDoor;
+
+    private Outline previousOutline;
+
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
         initalHandPos = handTransform.localPosition;
     }
+
     void Update()
     {
         CheckTarget();
         //MoveHand();
     }
 
-
-    private Outline previousOutline;  
-
     // highlights observed object and targets it for grabbing
     private void CheckTarget()
     {
+        interactableDoor = null;
+
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2f))
@@ -55,7 +57,6 @@ public class PlayerGrab : MonoBehaviour
 
             if (outline != null && outline != previousOutline)
             {
-
                 if (previousOutline != null)
                     previousOutline.enabled = false;
 
@@ -68,28 +69,36 @@ public class PlayerGrab : MonoBehaviour
             if (hit.collider.CompareTag("Grabbable"))
             {
                 GameObject newTarget = hit.collider.gameObject;
-
                 grabTarget = newTarget;
+                taskTarget = null;
                 return;
             }
 
             if (hit.collider.CompareTag("Task"))
             {
                 taskTarget = hit.collider.gameObject;
+                grabTarget = null;
+                return;
+            }
 
+            FridgeDoor door = hit.collider.GetComponent<FridgeDoor>();
+            if (door != null)
+            {
+                interactableDoor = door;
+                grabTarget = null;
+                taskTarget = null;
                 return;
             }
         }
 
-        
         if (previousOutline != null)
             previousOutline.enabled = false;
 
         previousOutline = null;
         grabTarget = null;
         taskTarget = null;
+        interactableDoor = null;
     }
-
 
     private void Grab()
     {
@@ -99,14 +108,10 @@ public class PlayerGrab : MonoBehaviour
             Ingredient heldIngredients = heldObject.GetComponent<Ingredient>();
             float sizeChangeVal = heldIngredients.sizeChangeValue;
             grabRb = heldObject.GetComponent<Rigidbody>();
-            //grabRb.isKinematic = true;
-            //grabRb.useGravity = false;
 
             heldCollider = heldObject.GetComponent<Collider>();
-
             if (heldCollider != null)
             {
-                //heldCollider.enabled = false;
                 StartCoroutine(DisableCollider(grabRb, heldCollider));
             }
 
@@ -115,14 +120,12 @@ public class PlayerGrab : MonoBehaviour
             heldObject.transform.localPosition = Vector3.zero;
             heldTargetNormalScale = heldObject.transform.localScale;
             heldObject.transform.localScale = heldObject.transform.localScale * sizeChangeVal;
-            //Debug.Log(heldTargetNormalScale + ", " + heldTarget.transform.localScale);
 
             gameManager.AudioPlayGrab();
         }
-        
     }
 
-    private void Throw ()
+    private void Throw()
     {
         if (heldObject != null)
         {
@@ -133,9 +136,7 @@ public class PlayerGrab : MonoBehaviour
 
             heldCollider = heldObject.GetComponent<Collider>();
             if (heldCollider != null)
-            {
                 heldCollider.enabled = true;
-            }
 
             Transform cam = Camera.main.transform;
             Vector3 dropPos = cam.position + cam.forward * 1.2f;
@@ -159,12 +160,7 @@ public class PlayerGrab : MonoBehaviour
         float mouseX = (Input.mousePosition.x / Screen.width - 0.5f);
         float mouseY = (Input.mousePosition.y / Screen.height - 0.5f);
 
-        Vector3 targetLocalPos = new Vector3
-            (
-                mouseX + 1.5f,   
-                mouseY - 0.5f,   
-            1f               
-            );
+        Vector3 targetLocalPos = new Vector3(mouseX + 1.5f, mouseY - 0.5f, 1f);
 
         handTransform.localPosition = Vector3.Lerp(
             handTransform.localPosition,
@@ -173,7 +169,7 @@ public class PlayerGrab : MonoBehaviour
         );
     }
 
-    IEnumerator Audio_CanDropCoroutine ()
+    IEnumerator Audio_CanDropCoroutine()
     {
         bool Is_Playing = false;
         if (Is_Playing == false)
@@ -200,12 +196,17 @@ public class PlayerGrab : MonoBehaviour
     {
         if (context.performed == false) return;
 
-        
+        if (interactableDoor != null)
+        {
+            interactableDoor.ToggleDoor();
+            return;
+        }
+
         if (grabTarget != null)
         {
             if (heldObject != null)
             {
-                Throw(); 
+                Throw();
             }
             Grab();
             return;
@@ -228,7 +229,4 @@ public class PlayerGrab : MonoBehaviour
             Throw();
         }
     }
-
-
-
 }
