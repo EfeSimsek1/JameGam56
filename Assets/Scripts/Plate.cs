@@ -13,6 +13,7 @@ public class Plate : MonoBehaviour
 {
     List<Ingredient> ingredients;
     [SerializeField] private List<IngredientCombination> winning_combos;
+    [SerializeField] GameObject restartMenu;
     public GameObject virtual_cam;
     public GameObject death_virtual_cam;
     [SerializeField] List<string> unsatisfiedMealLinesSingular;
