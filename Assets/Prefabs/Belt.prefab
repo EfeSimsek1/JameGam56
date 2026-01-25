@@ -172,9 +172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fa6899298467b43af0b4aea0733b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientName: 
+  ingredientName: apple salad
   cutIngredient: {fileID: 0}
   cutAnimLocalPos: {x: 0, y: 0, z: 0}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}
   canBeCut: 0
+  soundWhenDropped: {fileID: 0}
   sizeChangeValue: 1

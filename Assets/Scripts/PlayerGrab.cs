@@ -19,6 +19,7 @@ public class PlayerGrab : MonoBehaviour
     GameObject taskTarget;
     Rigidbody grabRb;
     Collider heldCollider;
+    AudioClip clipToPlay;
     [SerializeField] private Pottext pottext;
     [SerializeField] private Dish dish;
     [SerializeField] private PotButton potButton;
@@ -156,6 +157,8 @@ public class PlayerGrab : MonoBehaviour
     {
         if (heldObject != null)
         {
+            clipToPlay = heldObject.GetComponent<Ingredient>().soundWhenDropped;
+
             heldObject.transform.parent = null;
             heldObject.transform.localScale = heldTargetNormalScale;
             grabRb.isKinematic = false;
@@ -210,7 +213,7 @@ public class PlayerGrab : MonoBehaviour
         if (Is_Playing == false)
         {
             Is_Playing = true;
-            gameManager.AudioPlayCanDrop();
+            if(clipToPlay != null) gameManager.SFX_AudioSource.PlayOneShot(clipToPlay);
             yield return new WaitForSeconds(1f);
             Is_Playing = false;
         }

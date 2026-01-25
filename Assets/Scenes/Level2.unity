@@ -2500,11 +2500,10 @@ MonoBehaviour:
   dialogueIndex: 0
   inDialogue: 0
   startingDialogue:
-  - Phew, what a tiring day at work.
-  - I barely have enough energy to make myself something to eat...
-  - The doctor told me to have 2 apple slices tonight.
-  - I should take a look at my doctor's notes before I do anything.
-  - '[Press TAB to open notebook]'
+  - '[Press E to advance dialogue]'
+  - Ahh, it's good to be home again
+  - Tonight, I'm gonna have some apple salad
+  - I wrote the recipe somewhere in my notes
 --- !u!4 &473819873
 Transform:
   m_ObjectHideFlags: 0
@@ -4643,7 +4642,7 @@ MonoBehaviour:
   m_text: 'Apple
 
 
-    - Makes no noise when dropped onto the floor.'
+    - Makes a splat noise when dropped onto the floor.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
   m_sharedMaterial: {fileID: 7915841995405996304, guid: b45678df14ae173419cc0bcd5321d8dc, type: 2}
@@ -16861,7 +16860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Plate
   winning_combos:
   - ingredients:
-    - apple pie
+    - apple salad
   restartMenu: {fileID: 0}
   virtual_cam: {fileID: 1553466511}
   death_virtual_cam: {fileID: 2005184856}
@@ -20681,6 +20680,7 @@ MonoBehaviour:
   cutAnimLocalPos: {x: -0.912, y: 0.141, z: 0.13}
   cutAnimLocalRotation: {x: -88.778, y: -90, z: 0}
   canBeCut: 0
+  soundWhenDropped: {fileID: 0}
   sizeChangeValue: 1
 --- !u!33 &6224583200701349236
 MeshFilter:
@@ -20911,6 +20911,10 @@ PrefabInstance:
       propertyPath: ingredientName
       value: apple
       objectReference: {fileID: 0}
+    - target: {fileID: 6938365032166789679, guid: c39f7774ffc815f4090ff149ef5df5bf, type: 3}
+      propertyPath: soundWhenDropped
+      value: 
+      objectReference: {fileID: 8300000, guid: 01f0525a3d2f7de42981f7466cb4da68, type: 3}
     - target: {fileID: 8182871202051972515, guid: c39f7774ffc815f4090ff149ef5df5bf, type: 3}
       propertyPath: m_Mass
       value: 1

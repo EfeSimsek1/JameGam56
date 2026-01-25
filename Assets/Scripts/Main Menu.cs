@@ -14,9 +14,9 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        creditPanel.SetActive(false);
+        if(creditPanel)creditPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
-        optionPanel.SetActive(false);
+        if(optionPanel)optionPanel.SetActive(false);
         fade = FindFirstObjectByType<TransitionManager>();
     }
 
