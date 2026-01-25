@@ -12664,9 +12664,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f1be06ec61d94439b7000b18a864ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
-  creditPanel: {fileID: 1590207473}
   mainMenuPanel: {fileID: 545508416}
   optionPanel: {fileID: 326460251}
+  creditPanel: {fileID: 1590207473}
   credit: {fileID: 347078146}
   is_Started: 0
 --- !u!224 &2029692211
@@ -14953,6 +14953,7 @@ MonoBehaviour:
   - ingredients:
     - apple slice
     - apple slice
+  restartMenu: {fileID: 0}
   virtual_cam: {fileID: 0}
   death_virtual_cam: {fileID: 0}
   unsatisfiedMealLinesSingular: []

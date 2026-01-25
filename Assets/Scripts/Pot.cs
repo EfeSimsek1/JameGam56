@@ -7,14 +7,15 @@ public class Pot : MonoBehaviour
     private GameManager gamemanager;
     public Pottext pottext;
     public Dish dish;
-    
+
+    public bool containIngredient = false;
     public List<string> ingredients = new List<string>();
     private Outline outline;
 
     private void Start()
     {
         dish.gameObject.SetActive(false);
-
+        containIngredient = false;
         playergrab = FindAnyObjectByType<PlayerGrab>();
         gamemanager = FindAnyObjectByType<GameManager>();
         outline = GetComponent<Outline>();

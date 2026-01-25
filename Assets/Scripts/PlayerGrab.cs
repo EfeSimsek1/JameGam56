@@ -22,6 +22,7 @@ public class PlayerGrab : MonoBehaviour
     [SerializeField] private Pottext pottext;
     [SerializeField] private Dish dish;
     [SerializeField] private PotButton potButton;
+    [SerializeField] private Pot pot;
 
     [SerializeField]
     public Transform handTransform;
@@ -259,6 +260,7 @@ public class PlayerGrab : MonoBehaviour
                 lookingPot.PutIngredient(heldObject);
                 heldObject = null;
                 ingredientName = null;
+                pot.containIngredient = true;
             }
             if (heldObject == null)
             {                
@@ -266,12 +268,22 @@ public class PlayerGrab : MonoBehaviour
             }
         }
         
-        if (lookingPotButton != null)
+        else if (lookingPotButton != null)
         {
-            pottext.MakeFoodText();
-            potButton.MakeDish();
-            dish.gameObject.SetActive(true);
-            Debug.Log(dish.dishType);
+            if (pot.containIngredient == false)
+            {
+                pottext.PutIngredinentFirst();
+            }
+            else
+            {
+                pottext.MakeFoodText();
+                potButton.MakeDish();
+                dish.gameObject.SetActive(true);
+                Debug.Log(dish.dishType);
+            }
+                
+           
+            
         }
 
         if (taskTarget != null && heldObject != null && heldObject.GetComponent<Ingredient>() != null && heldObject.GetComponent<Ingredient>().canBeCut)
