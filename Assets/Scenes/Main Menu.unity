@@ -2351,7 +2351,6 @@ GameObject:
   - component: {fileID: 505062339}
   - component: {fileID: 505062343}
   - component: {fileID: 505062342}
-  - component: {fileID: 505062341}
   - component: {fileID: 505062340}
   m_Layer: 5
   m_Name: Fade
@@ -2391,18 +2390,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &505062341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 505062338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45c04a7226083f24cba10c28e43c2b88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fade
 --- !u!114 &505062342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11120,6 +11107,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844564979}
   m_CullTransparentMesh: 1
+--- !u!1 &1854385699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1854385701}
+  - component: {fileID: 1854385700}
+  m_Layer: 0
+  m_Name: TransitionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1854385700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854385699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c04a7226083f24cba10c28e43c2b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransitionManager
+  fadeScreen: {fileID: 505062342}
+--- !u!4 &1854385701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854385699}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1867703342
 GameObject:
   m_ObjectHideFlags: 0
@@ -14642,10 +14674,13 @@ MonoBehaviour:
     - apple slice
     - apple slice
   virtual_cam: {fileID: 0}
+  death_virtual_cam: {fileID: 0}
   unsatisfiedMealLinesSingular: []
   unsatisfiedMealLinesPlural: []
   satisfiedMealLines: []
+  partialMatchLines: []
   emptyPlateLines: []
+  dyingLines: []
 --- !u!1001 &1203080119650396922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20472,3 +20507,4 @@ SceneRoots:
   - {fileID: 2029692211}
   - {fileID: 331721810}
   - {fileID: 244368092}
+  - {fileID: 1854385701}

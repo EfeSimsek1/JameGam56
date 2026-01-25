@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject optionPanel;
 
-    private Fade fade;
+    private TransitionManager fade;
 
     public bool is_Started = false;
 
@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         optionPanel.SetActive(false);
-        fade = FindFirstObjectByType<Fade>();
+        fade = FindFirstObjectByType<TransitionManager>();
     }
 
     

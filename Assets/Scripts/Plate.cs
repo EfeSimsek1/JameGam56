@@ -113,7 +113,7 @@ public class Plate : MonoBehaviour
         {
             dialogueManager.InitiateDialogue(satisfiedMealLines);
             yield return new WaitUntil(() => !dialogueManager.inDialogue);
-            FindAnyObjectByType<Fade>().FadeOutNextLevel(3f);
+            FindAnyObjectByType<TransitionManager>().FadeOutNextLevel(3f);
             FindAnyObjectByType<FPController>().GetComponent<FPController>().PausePlayer();
         }
         
@@ -125,7 +125,7 @@ public class Plate : MonoBehaviour
 
             dialogueManager.InitiateDialogue(dyingLines);
             yield return new WaitUntil(() => !dialogueManager.inDialogue);
-            FindAnyObjectByType<Fade>().GetComponent<Fade>().FadeOut("Main Menu", 3f);
+            FindAnyObjectByType<TransitionManager>().GetComponent<TransitionManager>().FadeOut("Main Menu", 3f);
             FindAnyObjectByType<FPController>().GetComponent<FPController>().PausePlayer();
             death_virtual_cam.SetActive(true);
 

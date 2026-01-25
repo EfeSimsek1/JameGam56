@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(FPController))]
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject Book;
+    [SerializeField] private GameObject pauseMenu;
 
     private bool isLookingAtBook = false;
 
@@ -35,9 +37,37 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void OnPauseGame(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        if (!pauseMenu.activeSelf)
+        {
+            Time.timeScale = 0f;
+            fpController.PausePlayer();
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
+            Time.timeScale = 1f;
+            if (!dialogueManager.inDialogue) fpController.ResumePlayer();
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+    }
+
     private void Start()
     {
         if (Book != null) Book.SetActive(false);
+        if (pauseMenu != null) pauseMenu.SetActive(false);
 
         fpController.canLook = true;
         fpController.canMove = true;

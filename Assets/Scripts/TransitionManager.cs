@@ -6,15 +6,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class Fade : MonoBehaviour
+public class TransitionManager : MonoBehaviour
 {
     private MainMenu mainMenu;
 
-    private Image fadeScreen;
+    [SerializeField] private Image fadeScreen;
+
     void Start()
     {
-        fadeScreen = GetComponent<Image>();
-
         ChangeAlpha(0f);
 
         mainMenu = FindAnyObjectByType<MainMenu>();
@@ -33,6 +32,20 @@ public class Fade : MonoBehaviour
         StartCoroutine(FadeOutCoroutine(sceneName, duration));
     }
 
+    public void FadeOutMainMenu(float duration)
+    {
+        if (Time.timeScale == 0) Time.timeScale = 1;
+        StartCoroutine(FadeOutCoroutine("Main Menu", duration));
+    }
+
+    public void FadeOutRestart(float duration)
+    {
+        if(Time.timeScale == 0) Time.timeScale = 1;
+        FindAnyObjectByType<Player>().PauseGame();
+
+        StartCoroutine(FadeOutCoroutine(SceneManager.GetActiveScene().name, duration));
+    }
+
     public void FadeOutNextLevel(float duration)
     {
         if(SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCount)
@@ -48,6 +61,7 @@ public class Fade : MonoBehaviour
     
     IEnumerator FadeOutCoroutine(string sceneName, float duration)
     {
+        Debug.Log("FadeOut");
         float t = 0f;
         while (t < duration)
         {
@@ -62,6 +76,7 @@ public class Fade : MonoBehaviour
 
     IEnumerator FadeIn()
     {
+        FPController player = FindAnyObjectByType<FPController>();
         float duration = 2f;
         float t = 0f;
         
@@ -70,9 +85,10 @@ public class Fade : MonoBehaviour
             t += Time.deltaTime;
             ChangeAlpha(1f - (t / duration));
             yield return null;
+
+            if (player != null) player.PausePlayer();
         }
 
-        FPController player = FindAnyObjectByType<FPController>();
         if (player != null) player.ResumePlayer();
 
         DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
@@ -81,6 +97,8 @@ public class Fade : MonoBehaviour
 
     private void ChangeAlpha(float a)
     {
+        if (fadeScreen == null) return;
+
         Color c = fadeScreen.color;
         c.a = a;
         fadeScreen.color = c;
