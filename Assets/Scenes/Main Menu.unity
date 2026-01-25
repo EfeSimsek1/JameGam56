@@ -1959,8 +1959,15 @@ MonoBehaviour:
   BGM_slider: {fileID: 1530715259}
   optionCanvas: {fileID: 634834996}
   optionPanel: {fileID: 326460251}
+  Eat: {fileID: 0}
   Grab: {fileID: 8300000, guid: b0da22100e11ea84f9fed5bd223d756f, type: 3}
   CanDrop: {fileID: 0}
+  CoinDrop: {fileID: 0}
+  KeyDrop: {fileID: 0}
+  GravelDrop: {fileID: 0}
+  SplatDrop: {fileID: 0}
+  BGM1: {fileID: 8300000, guid: 31ef89cb9acfc8942adbf498ef624178, type: 3}
+  BGM2: {fileID: 8300000, guid: e0e39e5d24de6914faeb66cf86f5db96, type: 3}
 --- !u!4 &331721810
 Transform:
   m_ObjectHideFlags: 0
@@ -8700,6 +8707,7 @@ MonoBehaviour:
   cutAnimLocalPos: {x: 0.044, y: 0.033, z: 0.075}
   cutAnimLocalRotation: {x: 0, y: 0, z: 0}
   canBeCut: 0
+  soundWhenDropped: {fileID: 0}
   sizeChangeValue: 1
 --- !u!4 &1319602551 stripped
 Transform:

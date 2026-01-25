@@ -23,12 +23,15 @@ public class Plate : MonoBehaviour
     [SerializeField] List<string> emptyPlateLines;
     [SerializeField] List<string> dyingLines;
 
+    private GameManager gameManager;
+
     private int strikes;
 
     private void Awake()
     {
         ingredients = new List<Ingredient>();
         strikes = 3;
+        gameManager = FindAnyObjectByType<GameManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -89,6 +92,8 @@ public class Plate : MonoBehaviour
             }
 
             if (!combo_matched) strikes--;
+
+            gameManager.AudioPlayEat();
 
             ingredients.RemoveAt(0);
             Destroy(item.gameObject);

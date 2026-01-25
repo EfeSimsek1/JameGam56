@@ -21,8 +21,17 @@ public class GameManager : MonoBehaviour
     public GameObject optionPanel;
 
     [Header("Audio Clips")]
-    public AudioClip Grab;
-    public AudioClip CanDrop;
+    public AudioClip Eat;           //done
+    public AudioClip Grab;          //done
+    public AudioClip CanDrop;       
+    public AudioClip CoinDrop;
+    public AudioClip KeyDrop;
+    public AudioClip GravelDrop;
+    public AudioClip SplatDrop;
+
+    public AudioClip BGM1;
+    public AudioClip BGM2;
+
 
     public static GameManager instance;
     private void Awake()
@@ -35,6 +44,7 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         DontDestroyOnLoad(gameObject);
+        StartCoroutine(PlayLoop());
     }
 
     void Start()
@@ -49,6 +59,8 @@ public class GameManager : MonoBehaviour
 
     }
 
+    #region AudioPlay
+    
     public void AudioPlayCanDrop()
     {
         if (SFX_AudioSource != null && CanDrop != null)
@@ -65,6 +77,56 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AudioPlayEat()
+    {
+        if (SFX_AudioSource != null && Eat != null)
+        {
+            SFX_AudioSource.PlayOneShot(Eat);
+        }
+    }
+
+    public void AudioPlayCandrop()
+    {
+        if (SFX_AudioSource != null && CanDrop != null)
+        {
+            SFX_AudioSource.PlayOneShot(CanDrop);
+        }
+    }
+    public void AudioPlayCoindrop()
+    {
+        if (SFX_AudioSource != null && CoinDrop != null)
+        {
+            SFX_AudioSource.PlayOneShot(CoinDrop);
+        }
+    }
+    public void AudioPlayKeydrop()
+    {
+        if (SFX_AudioSource != null && KeyDrop != null)
+        {
+            SFX_AudioSource.PlayOneShot(KeyDrop);
+        }
+    }
+    public void AudioPlayGraveldrop()
+    {
+        if (SFX_AudioSource != null && GravelDrop != null)
+        {
+            SFX_AudioSource.PlayOneShot(GravelDrop);
+        }
+    }
+    public void AudioPlaySplatdrop()
+    {
+        if (SFX_AudioSource != null && SplatDrop != null)
+        {
+            SFX_AudioSource.PlayOneShot(SplatDrop);
+        }
+    }
+   #endregion
+    
+    public void AudioPlayBGM()
+    {
+
+    }
+    
     public void SetSFXVolume()
     {
 
@@ -77,5 +139,19 @@ public class GameManager : MonoBehaviour
         float value = Mathf.Clamp(BGM_slider.value, 0.001f, 1f);
         audioMixer.SetFloat("BGM", Mathf.Log10(value) * 20);
 
+    }
+
+    IEnumerator PlayLoop()
+    {
+        while (true)
+        {
+            BGM_AudioSource.clip = BGM1;
+            BGM_AudioSource.Play();
+            yield return new WaitForSeconds(BGM1.length);
+
+            BGM_AudioSource.clip = BGM2;
+            BGM_AudioSource.Play();
+            yield return new WaitForSeconds(BGM2.length);
+        }
     }
 }

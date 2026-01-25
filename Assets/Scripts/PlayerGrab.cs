@@ -38,6 +38,8 @@ public class PlayerGrab : MonoBehaviour
     [HideInInspector] public string ingredientName = null;
     private Pot lookingPot = null;
     private PotButton lookingPotButton = null;
+
+    
     private void Start()
     {
 
@@ -178,16 +180,28 @@ public class PlayerGrab : MonoBehaviour
             {
                 heldCollider.enabled = true;
             }
+            Ingredient heldIngredient = heldObject.GetComponent<Ingredient>();
+
+            if (heldIngredient.soundWhenDropped == null)
+            {
+                gameManager.AudioPlayGraveldrop();
+            }
+            else
+            {
+                gameManager.SFX_AudioSource.PlayOneShot(heldIngredient.soundWhenDropped);
+            }
+                
 
             Transform cam = Camera.main.transform;
             Vector3 dropPos = cam.position + cam.forward * 1.2f;
             dropPos.y = transform.position.y + 2f;
             heldObject.transform.position = dropPos;
 
-            StartCoroutine(Audio_CanDropCoroutine());
+            
 
             heldObject = null;
             ingredientName = null;
+            
         }
     }
 
