@@ -47,6 +47,14 @@ public class Pottext : MonoBehaviour
         }
     }
 
+    public void PutIngredinentFirst ()
+    {
+        if (!isShowingText)
+        {
+            if (currentCoroutine != null) StopCoroutine(currentCoroutine);
+            currentCoroutine = StartCoroutine(PutSomeIngredientsCoroutine(waitTime));
+        }
+    }
     private IEnumerator ZeroCoroutine(float waitTime)
     {
         isShowingText = true;
@@ -81,6 +89,17 @@ public class Pottext : MonoBehaviour
         potText.text = "You finally made something..\n We don't know what is it.";
 
         yield return new WaitForSeconds(waitTime + 1.4f);
+
+        potText.text = null;
+        isShowingText = false;
+    }
+    private IEnumerator PutSomeIngredientsCoroutine (float waitTime)
+    {
+        isShowingText = true;
+
+        potText.text = "You should put some Ingredients first.";
+
+        yield return new WaitForSeconds(waitTime + 0.9f);
 
         potText.text = null;
         isShowingText = false;

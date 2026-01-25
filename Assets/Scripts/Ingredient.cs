@@ -8,7 +8,7 @@ public class Ingredient : MonoBehaviour
     public Vector3 cutAnimLocalPos;
     public Vector3 cutAnimLocalRotation;
     public bool canBeCut;
-
+    public AudioClip soundWhenDropped;
 
     [Tooltip("0.1 ~ 1")]  public float sizeChangeValue = 1f;
 
