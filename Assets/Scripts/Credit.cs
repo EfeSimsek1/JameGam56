@@ -20,7 +20,7 @@ public class Credit : MonoBehaviour
             {
                 creditStart = false;
                 mainMenu.mainMenuPanel.SetActive(true);
-                mainMenu.creditPanel.SetActive(false);
+                //mainMenu.creditPanel.SetActive(false);
             }
         }
             

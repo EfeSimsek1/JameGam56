@@ -7,6 +7,11 @@ public class FridgeDoor : MonoBehaviour
 
     private bool isOpen = false;
 
+    private void Start()
+    {
+        GetComponent<Outline>().enabled = false;
+    }
+
     public void ToggleDoor()
     {
         isOpen = !isOpen;
