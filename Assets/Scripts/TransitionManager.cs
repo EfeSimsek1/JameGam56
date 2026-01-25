@@ -47,10 +47,16 @@ public class TransitionManager : MonoBehaviour
     }
 
     public void FadeOutNextLevel(float duration)
-    {
-        if(SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCount)
+    {;
+        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
         {
-            StartCoroutine(FadeOutCoroutine((SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex)).name, 3f));
+            Debug.Log("pp");
+            string path = SceneUtility.GetScenePathByBuildIndex(nextIndex);
+            string nextSceneName = System.IO.Path.GetFileNameWithoutExtension(path);
+
+            StartCoroutine(FadeOutCoroutine(nextSceneName, duration));
         }
         else
         {
@@ -61,7 +67,7 @@ public class TransitionManager : MonoBehaviour
     
     IEnumerator FadeOutCoroutine(string sceneName, float duration)
     {
-        Debug.Log("FadeOut");
+        Debug.Log("22");
         float t = 0f;
         while (t < duration)
         {

@@ -1,50 +1,83 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Pot : MonoBehaviour
 {
-    private PlayerGrab playergrab;
-    private GameManager gamemanager;
-    public Pottext pottext;
-    public Dish dish;
-    
-    public List<string> ingredients = new List<string>();
-    private Outline outline;
+    private List<Ingredient> ingredients;
+    [SerializeField] Recipe recipe;
+    [SerializeField] GameObject ruinedDish;
+    [SerializeField] Vector3 dishSpawnPos;
 
     private void Start()
     {
-        dish.gameObject.SetActive(false);
-
-        playergrab = FindAnyObjectByType<PlayerGrab>();
-        gamemanager = FindAnyObjectByType<GameManager>();
-        outline = GetComponent<Outline>();
-        outline.enabled = false;
+        ingredients = new List<Ingredient>();
     }
 
-    public void PutIngredient(GameObject ingredientObject)
+    private void OnTriggerEnter(Collider other)
     {
-        if (ingredientObject == null) return;
-
-        Ingredient ingredientComp = ingredientObject.GetComponent<Ingredient>();
-        if (ingredientComp == null) return;
-
-        string ingredientName = ingredientComp.ingredientName;
-        ingredients.Add(ingredientName); 
-        Debug.Log(ingredientName);
-
-        
-        if (pottext != null)
-            pottext.IngredientsPutText();
-
-        Destroy(ingredientObject);
+        Ingredient ingredient = other.gameObject.GetComponent<Ingredient>();
+        if (ingredient != null)
+        {
+            ingredients.Add(ingredient);
+        }
     }
 
-    public void MakeDish (string dishType)
+    private void OnTriggerExit(Collider other)
     {
-        dish.dishType = dishType;
-        dish.gameObject.SetActive(true);
+        Ingredient ingredient = other.gameObject.GetComponent<Ingredient>();
+        if (ingredient != null)
+        {
+            ingredients.Remove(ingredient);
+        }
     }
 
+    public void CookMeal()
+    {
+        if(ingredients.Count > 0 && HaveSameItems(recipe.recipe_ingredients, ingredients.Select(x => x.ingredientName).ToList()))
+        {
+            Debug.Log("Ingredients Matched!");
+            Instantiate(recipe.Dish, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(ruinedDish, transform.position, Quaternion.identity);
+        }
 
+        foreach(Ingredient ingredient in ingredients)
+        {
+            Destroy(ingredient.gameObject);
+        }
+    }
 
+    bool HaveSameItems<T>(List<T> a, List<T> b)
+    {
+        if (a.Count != b.Count)
+            return false;
+
+        var counts = new Dictionary<T, int>();
+
+        foreach (var item in a)
+        {
+            counts[item] = counts.TryGetValue(item, out int c) ? c + 1 : 1;
+        }
+
+        foreach (var item in b)
+        {
+            if (!counts.TryGetValue(item, out int c))
+                return false;
+
+            if (--counts[item] == 0)
+                counts.Remove(item);
+        }
+
+        return counts.Count == 0;
+    }
+}
+
+[System.Serializable]
+public struct Recipe
+{
+    public List<string> recipe_ingredients;
+    public GameObject Dish;
 }

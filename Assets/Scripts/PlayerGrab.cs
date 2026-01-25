@@ -35,8 +35,7 @@ public class PlayerGrab : MonoBehaviour
     [SerializeField] LayerMask interactable;
 
     [HideInInspector] public string ingredientName = null;
-    private Pot lookingPot = null;
-    private PotButton lookingPotButton = null;
+
     private void Start()
     {
 
@@ -85,19 +84,10 @@ public class PlayerGrab : MonoBehaviour
                 return;
             }
 
-            PotButton potButton = hit.collider.GetComponent<PotButton>();
-            if (potButton != null)
-            {
-                taskTarget = hit.collider.gameObject;
-                lookingPotButton = potButton;
-                return;
-            }
-
             Pot pot = hit.collider.GetComponent<Pot>();
             if (pot != null)
             {
                 taskTarget = hit.collider.gameObject;
-                lookingPot = pot;
                 return;
             }
 
@@ -122,7 +112,6 @@ public class PlayerGrab : MonoBehaviour
         previousOutline = null;
         grabTarget = null;
         taskTarget = null;
-        lookingPot = null;
     }
 
 
@@ -255,28 +244,6 @@ public class PlayerGrab : MonoBehaviour
             return;
         }
 
-        if (lookingPot != null)
-        {
-            if (heldObject != null)
-            {
-                lookingPot.PutIngredient(heldObject);
-                heldObject = null;
-                ingredientName = null;
-            }
-            if (heldObject == null)
-            {                
-                pottext.IngredientsPutTextZero();
-            }
-        }
-        
-        if (lookingPotButton != null)
-        {
-            pottext.MakeFoodText();
-            potButton.MakeDish();
-            dish.gameObject.SetActive(true);
-            Debug.Log(dish.dishType);
-        }
-
         if (taskTarget != null && heldObject != null && heldObject.GetComponent<Ingredient>() != null && heldObject.GetComponent<Ingredient>().canBeCut)
         {
             CuttingBoard board = taskTarget.GetComponent<CuttingBoard>();
@@ -298,6 +265,11 @@ public class PlayerGrab : MonoBehaviour
         if(taskTarget != null && taskTarget.GetComponent<FridgeDoor>() != null)
         {
             taskTarget.GetComponent<FridgeDoor>().ToggleDoor();
+        }
+
+        if (taskTarget != null && taskTarget.GetComponentInChildren<PotButton>() != null)
+        {
+            taskTarget.GetComponentInChildren<PotButton>().pot.CookMeal();
         }
 
         if (heldObject != null)

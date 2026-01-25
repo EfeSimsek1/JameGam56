@@ -76,7 +76,6 @@ public class Plate : MonoBehaviour
         while (ingredients.Count > 0)
         {
             Ingredient item = ingredients[0];
-            bool combo_matched = false;
 
             foreach(IngredientCombination combo in winning_combos)
             {
@@ -84,11 +83,8 @@ public class Plate : MonoBehaviour
                 {
                     combo.ingredients.Remove(item.ingredientName);
                     items_matched++;
-                    combo_matched = true;
                 }
             }
-
-            if (!combo_matched) strikes--;
 
             ingredients.RemoveAt(0);
             Destroy(item.gameObject);
