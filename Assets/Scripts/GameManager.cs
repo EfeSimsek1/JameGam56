@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public AudioMixer audioMixer;
     public AudioSource SFX_AudioSource;
     public AudioSource BGM_AudioSource;
+    public AudioMixer SFX_mixer;
+    public AudioMixer BGM_mixer;
+
 
     public Slider SFX_slider;
     public Slider BGM_slider;
@@ -131,13 +134,13 @@ public class GameManager : MonoBehaviour
     {
 
         float value = Mathf.Clamp(SFX_slider.value, 0.001f, 1f);
-        audioMixer.SetFloat("SFX", Mathf.Log10(value) * 20);
+        SFX_mixer.SetFloat("SFX", Mathf.Log10(value) * 20);
     }
 
     public void SetBGMVolume()
     {
         float value = Mathf.Clamp(BGM_slider.value, 0.001f, 1f);
-        audioMixer.SetFloat("BGM", Mathf.Log10(value) * 20);
+        BGM_mixer.SetFloat("BGM", Mathf.Log10(value) * 20);
 
     }
 

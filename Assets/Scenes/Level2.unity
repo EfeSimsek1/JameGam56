@@ -8455,6 +8455,10 @@ PrefabInstance:
       propertyPath: ingredientName
       value: lettuce
       objectReference: {fileID: 0}
+    - target: {fileID: 6638320246031716353, guid: 7fb5c772178617841b29d672c59c7390, type: 3}
+      propertyPath: soundWhenDropped
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ecf2a25be1195e48975376cb863d9f0, type: 3}
     - target: {fileID: 7388821969960786259, guid: 7fb5c772178617841b29d672c59c7390, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -11864,6 +11868,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6511105076249758377, guid: 4c0c0b70cbc09bf49bb4e464909030eb, type: 3}
+      propertyPath: soundWhenDropped
+      value: 
+      objectReference: {fileID: 8300000, guid: 01f0525a3d2f7de42981f7466cb4da68, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16860,7 +16868,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Plate
   winning_combos:
   - ingredients:
-    - apple salad
+    - apple slice
+    - apple slice
+    - lettuce slice
+    - lettuce slice
   restartMenu: {fileID: 0}
   virtual_cam: {fileID: 1553466511}
   death_virtual_cam: {fileID: 2005184856}
@@ -20680,7 +20691,7 @@ MonoBehaviour:
   cutAnimLocalPos: {x: -0.912, y: 0.141, z: 0.13}
   cutAnimLocalRotation: {x: -88.778, y: -90, z: 0}
   canBeCut: 0
-  soundWhenDropped: {fileID: 0}
+  soundWhenDropped: {fileID: 8300000, guid: 93da6ecfecf0b404e9b1ebf3fde9fe97, type: 3}
   sizeChangeValue: 1
 --- !u!33 &6224583200701349236
 MeshFilter:

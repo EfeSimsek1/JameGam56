@@ -266,6 +266,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6511105076249758377, guid: 4c0c0b70cbc09bf49bb4e464909030eb, type: 3}
+      propertyPath: soundWhenDropped
+      value: 
+      objectReference: {fileID: 8300000, guid: 0c4e65ad731e2e244944c6ee42100e22, type: 3}
+    - target: {fileID: 6511105076249758377, guid: 4c0c0b70cbc09bf49bb4e464909030eb, type: 3}
       propertyPath: cutAnimLocalPos.y
       value: 0.315
       objectReference: {fileID: 0}
@@ -8504,6 +8508,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 22
       objectReference: {fileID: 0}
+    - target: {fileID: 6638320246031716353, guid: 7fb5c772178617841b29d672c59c7390, type: 3}
+      propertyPath: soundWhenDropped
+      value: 
+      objectReference: {fileID: 8300000, guid: 0c4e65ad731e2e244944c6ee42100e22, type: 3}
     - target: {fileID: 7388821969960786259, guid: 7fb5c772178617841b29d672c59c7390, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -14580,7 +14588,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Plate
   winning_combos:
   - ingredients:
-    - apple
+    - apple slice
+    - apple slice
   - ingredients:
     - apple slice
     - apple slice
@@ -18832,7 +18841,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &5785408228553477960
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21222,7 +21231,7 @@ MonoBehaviour:
   m_text: 'Good morning dear patient.
 
 
-    I''m witing these notes, in part, to
+    I''m writing these notes, in part, to
     apologise for not believing you when we first met. Although it is not surprising
     in hindsight - your condition is unlike anything I''ve seen in my entire life.
 
@@ -21938,6 +21947,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: peach
       objectReference: {fileID: 0}
+    - target: {fileID: 8425325704697428045, guid: ee1630ace4c09c946be20900260a37c6, type: 3}
+      propertyPath: soundWhenDropped
+      value: 
+      objectReference: {fileID: 8300000, guid: 93da6ecfecf0b404e9b1ebf3fde9fe97, type: 3}
     - target: {fileID: 8425325704697428045, guid: ee1630ace4c09c946be20900260a37c6, type: 3}
       propertyPath: cutAnimLocalRotation.x
       value: 90
