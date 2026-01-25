@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 97637a2a763b7f24b8da4e139e4144ca, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -4595,6 +4595,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerGrab
   handTransform: {fileID: 1979522070}
   handFollowSpeed: 1
+  interactable:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &634591439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4608,6 +4611,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   fpController: {fileID: 634591440}
+  playerInput: {fileID: 634591441}
+  Book: {fileID: 0}
+  pauseMenu: {fileID: 0}
 --- !u!114 &634591440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4625,6 +4631,8 @@ MonoBehaviour:
   lookSensitivity: {x: 0.1, y: 0.1}
   pitchLimit: 85
   currentPitch: 0
+  canMove: 0
+  canLook: 0
   moveInput: {x: 0, y: 0}
   lookInput: {x: 0, y: 0}
   characterController: {fileID: 634591442}
@@ -4963,8 +4971,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e9fdacbf5e1fe4db690631854ba594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  audioMixer: {fileID: 0}
   SFX_AudioSource: {fileID: 0}
   BGM_AudioSource: {fileID: 0}
+  SFX_slider: {fileID: 0}
+  BGM_slider: {fileID: 0}
+  optionCanvas: {fileID: 0}
+  optionPanel: {fileID: 0}
   Grab: {fileID: 0}
   CanDrop: {fileID: 0}
 --- !u!4 &667106781
@@ -8518,7 +8531,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0, g: 0.5608108, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
