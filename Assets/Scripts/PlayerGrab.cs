@@ -41,7 +41,7 @@ public class PlayerGrab : MonoBehaviour
     private void Start()
     {
 
-        dish.gameObject.SetActive(false);
+        //dish.gameObject.SetActive(false);
         gameManager = FindFirstObjectByType<GameManager>();
         initalHandPos = handTransform.localPosition;
 
@@ -100,6 +100,12 @@ public class PlayerGrab : MonoBehaviour
                 taskTarget = hit.collider.gameObject;
                 lookingPot = pot;
                 return;
+            }
+
+            FridgeDoor door = hit.collider.GetComponent<FridgeDoor>();
+            if (door)
+            {
+                taskTarget = hit.collider.gameObject;
             }
 
             if (hit.collider.CompareTag("Task"))
@@ -239,9 +245,6 @@ public class PlayerGrab : MonoBehaviour
 
         DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
         if (dialogueManager) dialogueManager.dialogueIndex++;
-
-
-        
         
         if (grabTarget != null)
         {
@@ -302,6 +305,11 @@ public class PlayerGrab : MonoBehaviour
         if(taskTarget != null && taskTarget.GetComponent<Bell>() != null)
         {
             taskTarget.GetComponent<Bell>().Ring();
+        }
+
+        if(taskTarget != null && taskTarget.GetComponent<FridgeDoor>() != null)
+        {
+            taskTarget.GetComponent<FridgeDoor>().ToggleDoor();
         }
 
         if (heldObject != null)
